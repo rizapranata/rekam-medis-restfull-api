@@ -8,7 +8,7 @@
   },
   "author": "Riza Pranata",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "dependencies": {
     "@prisma/client": "^5.3.1",
     "bcrypt": "^5.1.1",
