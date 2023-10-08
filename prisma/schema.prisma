@@ -11,31 +11,30 @@ datasource db {
 }
 
 model User {
-  super_user String  @id @db.VarChar(100)
-  password   String  @db.VarChar(100)
-  name       String  @db.VarChar(100)
-  token      String? @db.VarChar(100)
+  super_user String   @id @db.VarChar(100)
+  password   String   @db.VarChar(100)
+  name       String   @db.VarChar(100)
+  token      String?  @db.VarChar(100)
   admins     Admin[]
+  doctors    Doctor[]
 
   @@map("users")
 }
 
 model Admin {
-  id              Int             @id @default(autoincrement())
-  username        String          @db.VarChar(100)
-  password        String          @db.VarChar(100)
-  email           String?         @db.VarChar(200)
-  phone           String?         @db.VarChar(20)
-  status          Boolean?        @db.TinyInt
-  token           String?         @db.VarChar(100)
-  super_user      String          @db.VarChar(100)
-  user            User            @relation(fields: [super_user], references: [super_user])
-  polyclinics     Polyclinic[]
-  doctors         Doctor[]
-  patients        Patient[]
-  medical_records MedicalRecord[]
-  drugs           Drug[]
-  transactions    Transaction[]
+  id           Int           @id @default(autoincrement())
+  username     String        @db.VarChar(100)
+  password     String        @db.VarChar(100)
+  email        String?       @db.VarChar(200)
+  phone        String?       @db.VarChar(20)
+  status       Boolean?      @db.TinyInt
+  token        String?       @db.VarChar(100)
+  super_user   String        @db.VarChar(100)
+  user         User          @relation(fields: [super_user], references: [super_user])
+  polyclinics  Polyclinic[]
+  patients     Patient[]
+  drugs        Drug[]
+  transactions Transaction[]
 
   @@map("admins")
 }
@@ -51,16 +50,20 @@ model Polyclinic {
 }
 
 model Doctor {
-  id         Int       @id @default(autoincrement())
-  name       String    @db.VarChar(100)
-  specialist String    @db.VarChar(100)
-  poly_name  String    @db.VarChar(100)
-  address    String?   @db.VarChar(225)
-  email      String?   @db.VarChar(200)
-  phone      String?   @db.VarChar(20)
-  admin_id   Int
-  admin      Admin     @relation(fields: [admin_id], references: [id])
-  patients   Patient[]
+  id              Int             @id @default(autoincrement())
+  username        String          @db.VarChar(100)
+  name            String          @db.VarChar(100)
+  password        String          @db.VarChar(100)
+  specialist      String          @db.VarChar(100)
+  poly_name       String          @db.VarChar(100)
+  address         String?         @db.VarChar(225)
+  email           String?         @db.VarChar(200)
+  phone           String?         @db.VarChar(20)
+  token           String?         @db.VarChar(100)
+  super_user      String          @db.VarChar(100)
+  user            User            @relation(fields: [super_user], references: [super_user])
+  patients        Patient[]
+  medical_records MedicalRecord[]
 
   @@map("doctors")
 }
@@ -82,16 +85,17 @@ model Patient {
 }
 
 model MedicalRecord {
-  id          Int          @id @default(autoincrement())
-  patient     String       @db.VarChar(100)
-  problem     String       @db.VarChar(100)
-  doctor      String       @db.VarChar(100)
-  diagnosis   String       @db.VarChar(200)
-  date        DateTime     @db.DateTime()
-  admin_id    Int
-  admin       Admin        @relation(fields: [admin_id], references: [id])
-  transaction Transaction?
-  drugs       Drug[]
+  id           Int                  @id @default(autoincrement())
+  patient      String               @db.VarChar(100)
+  problem      String               @db.VarChar(100)
+  diagnosis    String               @db.VarChar(200)
+  note         String               @db.VarChar(255)
+  date         DateTime             @default(now())
+  doctor_id    Int
+  doctor       Doctor               @relation(fields: [doctor_id], references: [id])
+  transaction  Transaction?
+  drugs        Drug[]
+  transactions MedicalTransaction[]
 
   @@map("medical_records")
 }
@@ -110,12 +114,23 @@ model Drug {
 }
 
 model Transaction {
-  id                Int           @id @default(autoincrement())
+  id                Int                  @id @default(autoincrement())
   total_price       Int
   admin_id          Int
-  admin             Admin         @relation(fields: [admin_id], references: [id])
-  medical_record    MedicalRecord @relation(fields: [medical_record_id], references: [id])
-  medical_record_id Int           @unique
+  admin             Admin                @relation(fields: [admin_id], references: [id])
+  medical_record    MedicalRecord        @relation(fields: [medical_record_id], references: [id])
+  medical_record_id Int                  @unique
+  medicalRecords    MedicalTransaction[]
 
   @@map("transactions")
+}
+
+model MedicalTransaction {
+  medicalRecord   MedicalRecord @relation(fields: [medicalRecordId], references: [id])
+  medicalRecordId Int
+  transaction     Transaction   @relation(fields: [transactionId], references: [id])
+  transactionId   Int
+  printedAt       DateTime      @default(now())
+
+  @@id([medicalRecordId, transactionId])
 }

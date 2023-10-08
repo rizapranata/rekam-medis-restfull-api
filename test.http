@@ -27,3 +27,14 @@ GET http://localhost:3000/api/users/current
 Content-Type: application/json
 Accept: application/json
 Authorization: 9c7e27ab-753e-437c-aa59-f85204557127
+
+### Patch current user -----------------
+
+PATCH http://localhost:3000/api/users/current
+Content-Type: application/json
+Accept: application/json
+Authorization: 9c7e27ab-753e-437c-aa59-f85204557127
+
+{
+    "name": "Karina Mawardah S.Kom"
+}
