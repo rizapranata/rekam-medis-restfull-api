@@ -9,6 +9,9 @@ const createAdminValidation = Joi.object({
     status: Joi.boolean().required()
 })
 
+const getAdminValidation = Joi.number().positive().required();
+
 export {
     createAdminValidation,
+    getAdminValidation
 }

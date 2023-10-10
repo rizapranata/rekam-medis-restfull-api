@@ -1,6 +1,6 @@
 import { prismaClient } from "../application/database.js";
 import { ResponseError } from "../error/response-error.js";
-import { createAdminValidation } from "../validation/admin-validation.js"
+import { createAdminValidation, getAdminValidation } from "../validation/admin-validation.js"
 import { validate } from "../validation/validation.js"
 import bcrypt from "bcrypt";
 
@@ -33,6 +33,31 @@ const create = async (user, request) => {
     })
 }
 
+const get = async (user, adminId) => {
+    adminId = validate(getAdminValidation, adminId);
+
+    const admin = await prismaClient.admin.findFirst({
+        where: {
+            super_user: user.super_user,
+            id: adminId
+        },
+        select: {
+            id: true,
+            username: true,
+            name: true,
+            email: true,
+            phone: true
+        }
+    });
+
+    if (!admin) {
+        throw new ResponseError(404, "Admin is not found");
+    }
+
+    return admin;
+}
+
 export default {
-    create
+    create,
+    get
 }

@@ -13,6 +13,7 @@ userRouter.delete('/api/users/logout', userController.logout);
 
 //Create Admin API
 userRouter.post('/api/admins', adminController.create)
+userRouter.get('/api/admins/:adminId', adminController.get)
 
 export {
     userRouter
