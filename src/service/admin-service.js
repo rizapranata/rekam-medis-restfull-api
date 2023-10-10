@@ -1,6 +1,7 @@
 import { prismaClient } from "../application/database.js";
 import { ResponseError } from "../error/response-error.js";
-import { createAdminValidation, getAdminValidation, updateAdminValidation } from "../validation/admin-validation.js"
+import { createAdminValidation, getAdminValidation, searchAdminValidation, updateAdminValidation } from "../validation/admin-validation.js"
+import { getUserValidation } from "../validation/user-validation.js";
 import { validate } from "../validation/validation.js"
 import bcrypt from "bcrypt";
 
@@ -116,9 +117,53 @@ const remove = async (user, adminId) => {
     })
 }
 
+const search = async (user, request) => {
+    request = validate(searchAdminValidation, request);
+
+    const filters = [];
+    filters.push({
+        username: user.username
+    });
+
+    if (request.name) {
+        filters.push({
+            name: {
+                contais: request.name
+            }
+        })
+    }
+
+    if (request.email) {
+        filters.push({
+            email: {
+                contains: request.email
+            }
+        })
+    }
+
+    if (request.phone) {
+        filters.push({
+            phone: {
+                contains: request.phone
+            }
+        })
+    }
+
+    const admins = await prismaClient.admin.findMany({
+        where: {
+            AND: filters
+        }
+    })
+
+    return {
+        data: admins
+    }
+}
+
 export default {
     create,
     get,
     update,
-    remove
+    remove,
+    search
 }

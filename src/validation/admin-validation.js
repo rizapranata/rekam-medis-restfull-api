@@ -20,8 +20,16 @@ const updateAdminValidation = Joi.object({
     status: Joi.boolean().required()
 })
 
+const searchAdminValidation = Joi.object({
+    username: Joi.string().optional(),
+    name: Joi.string().optional(),
+    email: Joi.string().optional(),
+    phone: Joi.string().optional()
+})
+
 export {
     createAdminValidation,
     getAdminValidation,
-    updateAdminValidation
+    updateAdminValidation,
+    searchAdminValidation
 }

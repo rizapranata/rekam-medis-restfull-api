@@ -16,6 +16,7 @@ userRouter.post('/api/admins', adminController.create);
 userRouter.get('/api/admins/:adminId', adminController.get);
 userRouter.put('/api/admins/:adminId', adminController.update);
 userRouter.delete('/api/admins/:adminId', adminController.remove);
+userRouter.get('/api/admins', adminController.search);
 
 export {
     userRouter

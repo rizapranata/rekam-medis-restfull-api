@@ -55,10 +55,10 @@ Accept: application/json
 Authorization: ac7d201e-d9d7-440d-a045-6976f8cc6174
 
 {
-    "username": "admin1",
-    "name": "Riza",
-    "email": "riza@gmail.com",
-    "phone": "09879980988",
+    "username": "admin3",
+    "name": "Eki Budi",
+    "email": "eki@gmail.com",
+    "phone": "08976767566",
     "password": "rahasia",
     "status": false
 }
@@ -85,9 +85,16 @@ Authorization: ac7d201e-d9d7-440d-a045-6976f8cc6174
     "status": true
 }
 
-### Get detail Admin --------------
+### Delete Admin --------------
 
-DELETE  http://localhost:3000/api/admins/3
+DELETE http://localhost:3000/api/admins/3
+Content-Type: application/json
+Accept: application/json
+Authorization: ac7d201e-d9d7-440d-a045-6976f8cc6174
+
+### Get all Admin --------------
+
+GET http://localhost:3000/api/admins/
 Content-Type: application/json
 Accept: application/json
 Authorization: ac7d201e-d9d7-440d-a045-6976f8cc6174

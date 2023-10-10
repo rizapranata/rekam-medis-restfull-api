@@ -56,9 +56,29 @@ const remove = async (req, res, next) => {
     }
 }
 
+const search = async (req, res, next) => {
+    try {
+        console.log("query:", req.query);
+        const user = req.user;
+        const request = {
+            name: req.query.name,
+            email: req.query.email,
+            phone: req.query.phone
+        };
+
+        const result = await adminService.search(user, request);
+        res.status(200).json({
+            data: result.data
+        })
+    } catch (e) {
+        next(e)
+    }
+}
+
 export default {
     create,
     get,
     update,
-    remove
+    remove,
+    search
 }
