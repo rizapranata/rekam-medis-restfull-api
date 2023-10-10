@@ -42,8 +42,23 @@ const update = async (req, res, next) => {
     }
 }
 
+const remove = async (req, res, next) => {
+    try {
+        const user = req.user;
+        const adminId = req.params.adminId;
+
+        await adminService.remove(user, adminId);
+        res.status(200).json({
+            data: "Ok"
+        })
+    } catch (e) {
+        next(e)
+    }
+}
+
 export default {
     create,
     get,
-    update
+    update,
+    remove
 }

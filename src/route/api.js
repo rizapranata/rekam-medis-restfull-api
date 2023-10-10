@@ -15,6 +15,7 @@ userRouter.delete('/api/users/logout', userController.logout);
 userRouter.post('/api/admins', adminController.create);
 userRouter.get('/api/admins/:adminId', adminController.get);
 userRouter.put('/api/admins/:adminId', adminController.update);
+userRouter.delete('/api/admins/:adminId', adminController.remove);
 
 export {
     userRouter

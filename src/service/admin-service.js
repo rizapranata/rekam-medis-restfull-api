@@ -95,8 +95,30 @@ const update = async (user, request) => {
     })
 }
 
+const remove = async (user, adminId) => {
+    adminId = validate(getAdminValidation, adminId);
+
+    const totalInDatabase = await prismaClient.admin.count({
+        where: {
+            super_user: user.super_user,
+            id: adminId
+        }
+    });
+
+    if (totalInDatabase !== 1) {
+        throw new ResponseError(404, "Admin is not found");
+    }
+
+    return prismaClient.admin.delete({
+        where: {
+            id: adminId
+        }
+    })
+}
+
 export default {
     create,
     get,
-    update
+    update,
+    remove
 }
