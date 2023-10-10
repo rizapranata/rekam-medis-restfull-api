@@ -77,7 +77,6 @@ const update = async (user, request) => {
             id: admin.id
         },
         data: {
-            username: admin.username,
             name: admin.name,
             email: admin.email,
             phone: admin.phone,
