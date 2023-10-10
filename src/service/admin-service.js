@@ -1,6 +1,6 @@
 import { prismaClient } from "../application/database.js";
 import { ResponseError } from "../error/response-error.js";
-import { createAdminValidation, getAdminValidation } from "../validation/admin-validation.js"
+import { createAdminValidation, getAdminValidation, updateAdminValidation } from "../validation/admin-validation.js"
 import { validate } from "../validation/validation.js"
 import bcrypt from "bcrypt";
 
@@ -57,7 +57,47 @@ const get = async (user, adminId) => {
     return admin;
 }
 
+const update = async (user, request) => {
+    const admin = validate(updateAdminValidation, request);
+    const totalAdminIndatabase = await prismaClient.admin.count({
+        where: {
+            super_user: user.super_user,
+            id: admin.id
+        }
+    });
+
+    if (!totalAdminIndatabase) {
+        throw new ResponseError(404, "Admin is not fount");
+    }
+
+    admin.password = await bcrypt.hash(admin.password, 10);
+
+    return prismaClient.admin.update({
+        where: {
+            id: admin.id
+        },
+        data: {
+            username: admin.username,
+            name: admin.name,
+            email: admin.email,
+            phone: admin.phone,
+            password: admin.password,
+            status: admin.status
+        },
+        select: {
+            id: true,
+            username: true,
+            name: true,
+            email: true,
+            phone: true,
+            password: true,
+            status: true
+        }
+    })
+}
+
 export default {
     create,
-    get
+    get,
+    update
 }

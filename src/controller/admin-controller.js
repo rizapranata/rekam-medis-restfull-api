@@ -26,7 +26,24 @@ const get = async (req, res, next) => {
     }
 }
 
+const update = async (req, res, next) => {
+    try {
+        const user = req.user;
+        const adminId = req.params.adminId;
+        const request = req.body;
+        request.id = adminId;
+
+        const result = await adminService.update(user, request);
+        res.status(200).json({
+            data: result
+        })
+    } catch (e) {
+        next(e)
+    }
+}
+
 export default {
     create,
-    get
+    get,
+    update
 }

@@ -65,7 +65,23 @@ Authorization: ac7d201e-d9d7-440d-a045-6976f8cc6174
 
 ### Get detail Admin --------------
 
-GET http://localhost:3000/api/admins/3
+GET http://localhost:3000/api/admins/1
 Content-Type: application/json
 Accept: application/json
 Authorization: ac7d201e-d9d7-440d-a045-6976f8cc6174
+
+### create admin -----------------
+
+PUT http://localhost:3000/api/admins/1
+Content-Type: application/json
+Accept: application/json
+Authorization: ac7d201e-d9d7-440d-a045-6976f8cc6174
+
+{
+    "username": "admin1",
+    "name": "Agus",
+    "email": "agus@gmail.com",
+    "phone": "0897976789",
+    "password": "rahasia",
+    "status": true
+}

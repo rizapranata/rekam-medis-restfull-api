@@ -12,8 +12,9 @@ userRouter.patch('/api/users/current', userController.update);
 userRouter.delete('/api/users/logout', userController.logout);
 
 //Create Admin API
-userRouter.post('/api/admins', adminController.create)
-userRouter.get('/api/admins/:adminId', adminController.get)
+userRouter.post('/api/admins', adminController.create);
+userRouter.get('/api/admins/:adminId', adminController.get);
+userRouter.put('/api/admins/:adminId', adminController.update);
 
 export {
     userRouter
