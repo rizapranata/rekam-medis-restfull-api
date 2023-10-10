@@ -24,6 +24,7 @@ model User {
 model Admin {
   id           Int           @id @default(autoincrement())
   username     String        @db.VarChar(100)
+  name         String        @db.VarChar(100)
   password     String        @db.VarChar(100)
   email        String?       @db.VarChar(200)
   phone        String?       @db.VarChar(20)

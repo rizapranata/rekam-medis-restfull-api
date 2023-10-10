@@ -26,14 +26,14 @@ Accept: application/json
 GET http://localhost:3000/api/users/current
 Content-Type: application/json
 Accept: application/json
-Authorization: 9c7e27ab-753e-437c-aa59-f85204557127
+Authorization: ac7d201e-d9d7-440d-a045-6976f8cc6174
 
 ### Patch current user -----------------
 
 PATCH http://localhost:3000/api/users/current
 Content-Type: application/json
 Accept: application/json
-Authorization: 9c7e27ab-753e-437c-aa59-f85204557127
+Authorization: ac7d201e-d9d7-440d-a045-6976f8cc6174
 
 {
     "name": "Karina Mawardah S.Kom"
@@ -44,4 +44,21 @@ Authorization: 9c7e27ab-753e-437c-aa59-f85204557127
 DELETE http://localhost:3000/api/users/logout
 Content-Type: application/json
 Accept: application/json
-Authorization: 9c7e27ab-753e-437c-aa59-f85204557127
+Authorization: ac7d201e-d9d7-440d-a045-6976f8cc6174
+
+# =========================================================================================
+### create admin -----------------
+
+POST http://localhost:3000/api/admins
+Content-Type: application/json
+Accept: application/json
+Authorization: ac7d201e-d9d7-440d-a045-6976f8cc6174
+
+{
+    "username": "admin3",
+    "name": "Riza",
+    "email": "riza@gmail.com",
+    "phone": "09879980988",
+    "password": "rahasia",
+    "status": false
+}
