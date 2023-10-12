@@ -108,12 +108,20 @@ Accept: application/json
 Authorization: ac7d201e-d9d7-440d-a045-6976f8cc6174
 
 {
-    "username": "doctor001",
-    "name": "Samsul Hadi S.pd M.pd",
-    "email": "samsul@gmail.com",
+    "username": "doctor002",
+    "name": "Bayu Prasetyo M.Kom",
+    "email": "bayu@gmail.com",
     "phone": "08976767566",
     "password": "rahasia",
-    "specialist": "Gigi",
-    "poly_name": "Poli Gigi",
-    "address": "JL. Mana Aja No.20"
+    "specialist": "Jantung",
+    "poly_name": "Poli Jantung",
+    "address": "JL. Mondar Mandir No.13"
 }
+
+
+### Get all doctor --------------
+
+GET http://localhost:3000/api/doctors/1
+Content-Type: application/json
+Accept: application/json
+Authorization: ac7d201e-d9d7-440d-a045-6976f8cc6174

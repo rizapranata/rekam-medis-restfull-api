@@ -9,8 +9,11 @@ const createDoctorValidation = Joi.object({
     specialist: Joi.string().max(100).required(),
     poly_name: Joi.string().max(100).required(),
     address: Joi.string().max(255).optional(),
-})
+});
+
+const getDoctorValidation = Joi.number().positive().required();
 
 export {
-    createDoctorValidation
+    createDoctorValidation,
+    getDoctorValidation
 }
