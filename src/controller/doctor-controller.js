@@ -43,6 +43,20 @@ const update = async (req, res, next) => {
     }
 }
 
+const remove = async (req, res, next) => {
+    try {
+        const super_user = req.user;
+        const doctorId = req.params.doctorId;
+
+        await doctorService.remove(super_user, doctorId);
+        res.status(200).json({
+            data: "Ok"
+        })
+    } catch (e) {
+        next(e)
+    }
+}
+
 const search = async (req, res, next) => {
     try {
         console.log("Query:", req.query);
@@ -70,5 +84,6 @@ export default {
     create,
     get,
     update,
+    remove,
     search
 }

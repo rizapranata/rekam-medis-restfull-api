@@ -108,6 +108,27 @@ const updtae = async (user, request) => {
     })
 }
 
+const remove = async (user, doctorId) => {
+    doctorId = validate(getDoctorValidation, doctorId);
+
+    const totalInDatabase = await prismaClient.doctor.count({
+        where: {
+            super_user: user.super_user,
+            id: doctorId
+        }
+    });
+
+    if (totalInDatabase !== 1) {
+        throw new ResponseError(404, "Doctor is not found");
+    }
+
+    return prismaClient.doctor.delete({
+        where: {
+            id: doctorId
+        }
+    })
+}
+
 const search = async (user, request) => {
     request = validate(searchDoctorValidation, request);
     
@@ -173,5 +194,6 @@ export default {
     create,
     get,
     updtae,
+    remove,
     search
 }
