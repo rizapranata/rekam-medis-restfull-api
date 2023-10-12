@@ -1,7 +1,6 @@
 import { prismaClient } from "../application/database.js";
 import { ResponseError } from "../error/response-error.js";
 import { createAdminValidation, getAdminValidation, searchAdminValidation, updateAdminValidation } from "../validation/admin-validation.js"
-import { getUserValidation } from "../validation/user-validation.js";
 import { validate } from "../validation/validation.js"
 import bcrypt from "bcrypt";
 
