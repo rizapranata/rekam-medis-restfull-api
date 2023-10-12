@@ -1,3 +1,4 @@
+import { prismaClient } from "../application/database.js";
 import doctorService from "../service/doctor-service.js";
 
 const create = async (req, res, next) => {
@@ -42,8 +43,32 @@ const update = async (req, res, next) => {
     }
 }
 
+const search = async (req, res, next) => {
+    try {
+        console.log("Query:", req.query);
+        const super_user = req.user;
+        const request = {
+            name: req.query.name,
+            email: req.query.email,
+            phone: req.query.phone,
+            page: req.query.page,
+            size: req.query.size
+        };
+
+        const result = await doctorService.search(super_user, request);
+        res.status(200).json({
+            data: result.data,
+            paging: result.paging
+        });
+
+    } catch (e) {
+        next(e)
+    }
+}
+
 export default {
     create,
     get,
-    update
+    update,
+    search
 }

@@ -22,10 +22,19 @@ const updateDoctorValidation = Joi.object({
     specialist: Joi.string().max(100).required(),
     poly_name: Joi.string().max(100).required(),
     address: Joi.string().max(255).optional()
+});
+
+const searchDoctorValidation = Joi.object({
+    page: Joi.number().min(1).positive().default(1),
+    size: Joi.number().min(1).positive().max(100).default(10),
+    name: Joi.string().optional(),
+    email: Joi.string().optional(),
+    phone: Joi.string().optional()
 })
 
 export {
     createDoctorValidation,
     getDoctorValidation,
-    updateDoctorValidation
+    updateDoctorValidation,
+    searchDoctorValidation
 }

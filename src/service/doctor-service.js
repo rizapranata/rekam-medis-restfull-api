@@ -1,6 +1,6 @@
 import { prismaClient } from "../application/database.js";
 import { ResponseError } from "../error/response-error.js";
-import { createDoctorValidation, getDoctorValidation, updateDoctorValidation } from "../validation/doctor-validation.js"
+import { createDoctorValidation, getDoctorValidation, searchDoctorValidation, updateDoctorValidation } from "../validation/doctor-validation.js"
 import { validate } from "../validation/validation.js"
 import bcrypt from "bcrypt";
 
@@ -108,8 +108,70 @@ const updtae = async (user, request) => {
     })
 }
 
+const search = async (user, request) => {
+    request = validate(searchDoctorValidation, request);
+    
+    // page = 1: ((page - 1) * size) = 0
+    // page = 2: ((page - 1) * size) = 10
+    const skip = (request.page - 1) * request.size;
+    const filters = [];
+
+    filters.push({
+        super_user: user.super_user
+    });
+
+    if (request.name) {
+        filters.push({
+            name: {
+                contains: request.name
+            }
+        })
+    }
+
+    if (request.email) {
+        filters.push({
+            email: {
+                contains: request.email
+            }
+        })
+    }
+
+    if (request.phone) {
+        filters.push({
+            phone: {
+                contains: request.phone
+            }
+        })
+    }
+
+    const doctors = await prismaClient.doctor.findMany({
+        where: {
+            AND: filters
+        },
+        take: request.size,
+        skip: skip
+    });
+
+    const totalItems = await prismaClient.doctor.count({
+        where: {
+            AND: filters
+        }
+    });
+
+    return {
+        data: doctors,
+        paging: {
+            page: request.page,
+            total_item: totalItems,
+            total_page: Math.ceil(totalItems / request.size)
+        }
+    }
+
+}
+
 export default {
     create,
     get,
-    updtae
+    updtae,
+    search
 }

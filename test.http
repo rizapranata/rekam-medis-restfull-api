@@ -141,3 +141,10 @@ Authorization: ac7d201e-d9d7-440d-a045-6976f8cc6174
     "poly_name": "Poli Kulit",
     "address": "JL. Mondar Mandir No.13"
 }
+
+### Get all doctors --------------
+
+GET http://localhost:3000/api/doctors
+Content-Type: application/json
+Accept: application/json
+Authorization: ac7d201e-d9d7-440d-a045-6976f8cc6174

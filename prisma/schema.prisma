@@ -56,7 +56,7 @@ model Doctor {
   name            String          @db.VarChar(100)
   password        String          @db.VarChar(100)
   specialist      String          @db.VarChar(100)
-  poly_name       String          @db.VarChar(100)
+  poly_name       String?         @db.VarChar(100)
   address         String?         @db.VarChar(225)
   email           String?         @db.VarChar(200)
   phone           String?         @db.VarChar(20)
