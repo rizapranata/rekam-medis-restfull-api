@@ -1,6 +1,6 @@
 import { prismaClient } from "../application/database.js";
 import { ResponseError } from "../error/response-error.js";
-import { createDoctorValidation, getDoctorValidation } from "../validation/doctor-validation.js"
+import { createDoctorValidation, getDoctorValidation, updateDoctorValidation } from "../validation/doctor-validation.js"
 import { validate } from "../validation/validation.js"
 import bcrypt from "bcrypt";
 
@@ -66,7 +66,50 @@ const get = async (user, doctorId) => {
     return doctor;
 }
 
+const updtae = async (user, request) => {
+    const doctor = validate(updateDoctorValidation, request);
+
+    const totalDoctorInDatabase = await prismaClient.doctor.count({
+        where: {
+            super_user: user.super_user,
+            id: doctor.id
+        }
+    });
+
+    if (!totalDoctorInDatabase) {
+        throw new ResponseError(404, "Doctor is not found");
+    }
+
+    doctor.password = await bcrypt.hash(doctor.password, 10);
+
+    return prismaClient.doctor.update({
+        where: {
+            id: doctor.id
+        },
+        data: {
+            name: doctor.name,
+            email: doctor.email,
+            phone: doctor.phone,
+            password: doctor.password,
+            specialist: doctor.specialist,
+            poly_name: doctor.poly_name,
+            address: doctor.address
+        },
+        select: {
+            id: true,
+            name: true,
+            email: true,
+            phone: true,
+            password: true,
+            specialist: true,
+            poly_name: true,
+            address: true
+        }
+    })
+}
+
 export default {
     create,
-    get
+    get,
+    updtae
 }

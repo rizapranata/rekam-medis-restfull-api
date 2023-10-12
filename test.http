@@ -108,20 +108,36 @@ Accept: application/json
 Authorization: ac7d201e-d9d7-440d-a045-6976f8cc6174
 
 {
-    "username": "doctor002",
-    "name": "Bayu Prasetyo M.Kom",
-    "email": "bayu@gmail.com",
+    "username": "doctor003",
+    "name": "Jihan Fahira Sp.JP",
+    "email": "jihan@gmail.com",
     "phone": "08976767566",
     "password": "rahasia",
-    "specialist": "Jantung",
+    "specialist": "Spesialist anak",
     "poly_name": "Poli Jantung",
-    "address": "JL. Mondar Mandir No.13"
+    "address": "JL.Suka Suka No.13"
 }
 
-
-### Get all doctor --------------
+### Get detail doctor --------------
 
 GET http://localhost:3000/api/doctors/1
 Content-Type: application/json
 Accept: application/json
 Authorization: ac7d201e-d9d7-440d-a045-6976f8cc6174
+
+### Update Doctor -----------------
+
+PUT  http://localhost:3000/api/doctors/2
+Content-Type: application/json
+Accept: application/json
+Authorization: ac7d201e-d9d7-440d-a045-6976f8cc6174
+
+{
+    "name": "Bayu Prasetyo Sp.KK",
+    "email": "bayu@gmail.com",
+    "phone": "08976767566",
+    "password": "rahasia",
+    "specialist": "Penyakit Kulit",
+    "poly_name": "Poli Kulit",
+    "address": "JL. Mondar Mandir No.13"
+}

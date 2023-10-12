@@ -22,6 +22,7 @@ userRouter.get('/api/admins', adminController.search);
 //Doctor API
 userRouter.post('/api/doctors', doctorController.create);
 userRouter.get('/api/doctors/:doctorId', doctorController.get);
+userRouter.put('/api/doctors/:doctorId', doctorController.update);
 
 export {
     userRouter

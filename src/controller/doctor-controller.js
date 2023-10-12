@@ -26,7 +26,24 @@ const get = async (req, res, next) => {
     }
 }
 
+const update = async (req, res, next) => {
+    try {
+        const super_user = req.user;
+        const doctorId = req.params.doctorId;
+        const request = req.body;
+        request.id = doctorId;
+
+        const result = await doctorService.updtae(super_user, request);
+        res.status(200).json({
+            data: result
+        })
+    } catch (e) {
+        next(e)
+    }
+}
+
 export default {
     create,
-    get
+    get,
+    update
 }
