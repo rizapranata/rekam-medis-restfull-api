@@ -13,6 +13,17 @@ const create = async(req, res, next) => {
     }
 }
 
+const login = async (req, res, next) => {
+    try {
+        const result = await adminService.login(req.body);
+        res.status(200).json({
+            data: result
+        })
+    } catch (e) {
+        next(e)
+    }
+}
+
 const get = async (req, res, next) => {
     try {
         const super_user = req.user;
@@ -80,5 +91,6 @@ export default {
     get,
     update,
     remove,
-    search
+    search,
+    login
 }

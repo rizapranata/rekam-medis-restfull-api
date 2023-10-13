@@ -27,9 +27,15 @@ const searchAdminValidation = Joi.object({
     phone: Joi.string().optional()
 })
 
+const loginAdminValidation = Joi.object({
+    username: Joi.string().max(100).required(),
+    password: Joi.string().max(100).required()
+})
+
 export {
     createAdminValidation,
     getAdminValidation,
     updateAdminValidation,
-    searchAdminValidation
+    searchAdminValidation,
+    loginAdminValidation
 }

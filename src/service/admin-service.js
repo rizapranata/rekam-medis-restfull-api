@@ -1,8 +1,10 @@
+import { request } from "express";
 import { prismaClient } from "../application/database.js";
 import { ResponseError } from "../error/response-error.js";
-import { createAdminValidation, getAdminValidation, searchAdminValidation, updateAdminValidation } from "../validation/admin-validation.js"
+import { createAdminValidation, getAdminValidation, loginAdminValidation, searchAdminValidation, updateAdminValidation } from "../validation/admin-validation.js"
 import { validate } from "../validation/validation.js"
 import bcrypt from "bcrypt";
+import { v4 as uuid } from "uuid";
 
 const create = async (user, request) => {
     const admin = validate(createAdminValidation, request);
@@ -29,6 +31,44 @@ const create = async (user, request) => {
             email: true,
             phone: true,
             status: true
+        }
+    })
+}
+
+const login = async (request) => {
+    const loginRequest = validate(loginAdminValidation, request);
+
+    const user = await prismaClient.admin.findUnique({
+        where: {
+            username: loginRequest.username
+        },
+        select: {
+            username: true,
+            password: true
+        }
+    });
+
+    if (!user) {
+        console.log("check user");
+        throw new ResponseError(401, "Username or password wrong");
+    }
+
+    const isPasswordValid = await bcrypt.compare(loginRequest.password, user.password);
+    if (!isPasswordValid) {
+        console.log("check password");
+        throw new ResponseError(401, "Username or password wrong");
+    }
+
+    const token = uuid().toString();
+    return prismaClient.admin.update({
+        data: {
+            token: token
+        },
+        where: {
+            username: user.username
+        },
+        select: {
+            token: true
         }
     })
 }
@@ -164,5 +204,6 @@ export default {
     get,
     update,
     remove,
-    search
+    search,
+    login
 }

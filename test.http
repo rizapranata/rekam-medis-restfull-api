@@ -155,3 +155,15 @@ GET http://localhost:3000/api/doctors
 Content-Type: application/json
 Accept: application/json
 Authorization: ac7d201e-d9d7-440d-a045-6976f8cc6174
+
+# =============================================================================================
+### login admin -----------------
+
+POST http://localhost:3000/api/admins/login
+Content-Type: application/json
+Accept: application/json
+
+{
+    "username": "admin2",
+    "password": "rahasia"
+}
