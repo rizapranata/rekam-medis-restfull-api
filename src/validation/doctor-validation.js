@@ -30,11 +30,20 @@ const searchDoctorValidation = Joi.object({
     name: Joi.string().optional(),
     email: Joi.string().optional(),
     phone: Joi.string().optional()
+});
+
+const doctorLoginValidation = Joi.object({
+    username: Joi.string().max(100).required(),
+    password: Joi.string().max(100).required()
 })
+
+const doctorLogoutValidation = Joi.string().max(100).required();
 
 export {
     createDoctorValidation,
     getDoctorValidation,
     updateDoctorValidation,
-    searchDoctorValidation
+    searchDoctorValidation,
+    doctorLoginValidation,
+    doctorLogoutValidation
 }

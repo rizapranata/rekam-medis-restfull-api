@@ -80,10 +80,34 @@ const search = async (req, res, next) => {
     }
 }
 
+const login = async (req, res, next) => {
+    try {
+        const result = await doctorService.login(req.body);
+        res.status(200).json({
+            data: result
+        })
+    } catch (e) {
+        next(e)
+    }
+}
+
+const logout = async (req, res, next) => {
+    try {
+        await doctorService.logout(req.user.username);
+        res.status(200).json({
+            data: "Ok"
+        })
+    } catch (e) {
+        next(e)
+    }
+}
+
 export default {
     create,
     get,
     update,
     remove,
-    search
+    search,
+    login,
+    logout
 }

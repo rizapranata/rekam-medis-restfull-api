@@ -86,11 +86,25 @@ const search = async (req, res, next) => {
     }
 }
 
+const logout = async (req, res, next) => {
+    console.log("masuk admin controller =======");
+
+    try {
+        await adminService.logout(req.user.username);
+        res.status(200).json({
+            data: "Ok"
+        })
+    } catch (e) {
+        next(e)
+    }
+}
+
 export default {
     create,
     get,
     update,
     remove,
     search,
-    login
+    login,
+    logout
 }

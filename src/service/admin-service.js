@@ -1,7 +1,6 @@
-import { request } from "express";
 import { prismaClient } from "../application/database.js";
 import { ResponseError } from "../error/response-error.js";
-import { createAdminValidation, getAdminValidation, loginAdminValidation, searchAdminValidation, updateAdminValidation } from "../validation/admin-validation.js"
+import { adminLogoutValidation, createAdminValidation, getAdminValidation, loginAdminValidation, searchAdminValidation, updateAdminValidation } from "../validation/admin-validation.js"
 import { validate } from "../validation/validation.js"
 import bcrypt from "bcrypt";
 import { v4 as uuid } from "uuid";
@@ -49,17 +48,16 @@ const login = async (request) => {
     });
 
     if (!user) {
-        console.log("check user");
         throw new ResponseError(401, "Username or password wrong");
     }
 
     const isPasswordValid = await bcrypt.compare(loginRequest.password, user.password);
     if (!isPasswordValid) {
-        console.log("check password");
         throw new ResponseError(401, "Username or password wrong");
     }
 
-    const token = uuid().toString();
+    const role = "admin";
+    const token = role + "-" + uuid().toString();
     return prismaClient.admin.update({
         data: {
             token: token
@@ -199,11 +197,42 @@ const search = async (user, request) => {
     }
 }
 
+const logout = async (username) => {
+    console.log("masuk admin service =======");
+    username = validate(adminLogoutValidation, username);
+    const admin = await prismaClient.admin.findUnique({
+        where: {
+            username: username
+        }
+    });
+    console.log("lolos 1");
+
+
+    if (!admin) {
+        throw new ResponseError(404, "Admin is not found");
+    }
+
+    console.log("lolos 2");
+
+    return prismaClient.admin.update({
+        where: {
+            username: username
+        },
+        data: {
+            token: null
+        },
+        select: {
+            username: true
+        }
+    })
+}
+
 export default {
     create,
     get,
     update,
     remove,
     search,
-    login
+    login,
+    logout
 }

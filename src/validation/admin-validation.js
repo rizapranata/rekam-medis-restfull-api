@@ -32,10 +32,16 @@ const loginAdminValidation = Joi.object({
     password: Joi.string().max(100).required()
 })
 
+const logoutAdminValidation = Joi.string().max(100).required();
+
+const adminLogoutValidation = Joi.string().max(100).required();
+
 export {
     createAdminValidation,
     getAdminValidation,
     updateAdminValidation,
     searchAdminValidation,
-    loginAdminValidation
+    loginAdminValidation,
+    logoutAdminValidation,
+    adminLogoutValidation
 }

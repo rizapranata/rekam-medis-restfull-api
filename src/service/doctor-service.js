@@ -1,9 +1,9 @@
 import { prismaClient } from "../application/database.js";
 import { ResponseError } from "../error/response-error.js";
-import { createDoctorValidation, getDoctorValidation, searchDoctorValidation, updateDoctorValidation } from "../validation/doctor-validation.js"
+import { createDoctorValidation, doctorLoginValidation, doctorLogoutValidation, getDoctorValidation, searchDoctorValidation, updateDoctorValidation } from "../validation/doctor-validation.js"
 import { validate } from "../validation/validation.js"
 import bcrypt from "bcrypt";
-
+import { v4 as uuid } from "uuid";
 
 const create = async (user, request) => {
     const doctor = validate(createDoctorValidation, request);
@@ -187,6 +187,68 @@ const search = async (user, request) => {
             total_page: Math.ceil(totalItems / request.size)
         }
     }
+}
+
+const login = async (request) => {
+    const loginRequest = validate(doctorLoginValidation, request);
+
+    const doctor = await prismaClient.doctor.findUnique({
+        where: {
+            username: loginRequest.username
+        },
+        select: {
+            username: true,
+            password: true
+        }
+    });
+
+    if (!doctor) {
+        throw new ResponseError(401, "Username or password wrong");
+    }
+
+    const isPasswordValid = await bcrypt.compare(loginRequest.password, doctor.password);
+    if (!isPasswordValid) {
+        throw new ResponseError(401, "Username or password wrong");
+    }
+
+    const role = "doctor";
+    const token = role + "-" + uuid().toString();
+    return prismaClient.doctor.update({
+        data: {
+            token: token
+        },
+        where: {
+            username: doctor.username
+        },
+        select: {
+            token: true
+        }
+    })
+}
+
+const logout = async (username) => {
+    username = validate(doctorLogoutValidation, username);
+    const doctor = await prismaClient.doctor.findUnique({
+        where: {
+            username: username
+        }
+    });
+
+    if (!doctor) {
+        throw new ResponseError(404, "Doctor is not found");
+    }
+
+    return prismaClient.admin.update({
+        where: {
+            username: username
+        },
+        data: {
+            token: null
+        },
+        select: {
+            username: true
+        }
+    })
 
 }
 
@@ -195,5 +257,7 @@ export default {
     get,
     updtae,
     remove,
-    search
+    search,
+    login,
+    logout
 }

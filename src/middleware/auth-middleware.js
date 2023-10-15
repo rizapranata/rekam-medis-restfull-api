@@ -7,11 +7,36 @@ export const authMiddleware = async (req, res, next) => {
             errors: "Unauthorized"
         }).end();
     }else{
-        const user = await prismaClient.user.findFirst({
-            where: {
-                token: token
-            }
-        })
+        const getRole = token.split('-')[0];
+        let user = {};
+        switch (getRole) {
+            case "super":
+                user = await prismaClient.user.findFirst({
+                    where: {
+                        token: token
+                    }
+                });
+                break;
+
+            case "admin":
+                user = await prismaClient.admin.findFirst({
+                    where: {
+                        token: token
+                    }
+                });
+                break;
+        
+            default:
+                user = await prismaClient.doctor.findFirst({
+                    where: {
+                        token: token
+                    }
+                });
+                break;
+        }
+
+        console.log("user isi:", user);
+         
         if (!user) {
             res.status(401).json({
                 errors: "Unauthorized"

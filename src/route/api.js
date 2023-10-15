@@ -5,7 +5,7 @@ import adminController from "../controller/admin-controller.js";
 import doctorController from "../controller/doctor-controller.js";
 
 const userRouter = new express.Router()
-userRouter.use(authMiddleware)
+userRouter.use(authMiddleware);
 
 // User API
 userRouter.get('/api/users/current', userController.get);
@@ -18,6 +18,7 @@ userRouter.get('/api/admins/:adminId', adminController.get);
 userRouter.put('/api/admins/:adminId', adminController.update);
 userRouter.delete('/api/admins/:adminId', adminController.remove);
 userRouter.get('/api/admins', adminController.search);
+userRouter.delete('/api/admins/logout', adminController.logout);
 
 //Doctor API
 userRouter.post('/api/doctors', doctorController.create);
@@ -25,6 +26,7 @@ userRouter.get('/api/doctors/:doctorId', doctorController.get);
 userRouter.put('/api/doctors/:doctorId', doctorController.update);
 userRouter.delete('/api/doctors/:doctorId', doctorController.remove);
 userRouter.get('/api/doctors', doctorController.search);
+userRouter.delete('/api/doctors/logout', doctorController.logout)
 
 export {
     userRouter

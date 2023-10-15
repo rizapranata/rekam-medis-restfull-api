@@ -26,7 +26,7 @@ Accept: application/json
 GET http://localhost:3000/api/users/current
 Content-Type: application/json
 Accept: application/json
-Authorization: ac7d201e-d9d7-440d-a045-6976f8cc6174
+Authorization: super-548251bf-7e32-48d4-b4e1-f2eb85e7357a
 
 ### Patch current user -----------------
 
@@ -39,12 +39,12 @@ Authorization: ac7d201e-d9d7-440d-a045-6976f8cc6174
     "name": "Karina Mawardah S.Kom"
 }
 
-### logout -----------------
+### logout super admin -----------------
 
 DELETE http://localhost:3000/api/users/logout
 Content-Type: application/json
 Accept: application/json
-Authorization: ac7d201e-d9d7-440d-a045-6976f8cc6174
+Authorization: super-c0b0cbcf-2ab1-4c92-b0ef-d096e7caa858
 
 # =========================================================================================
 ### create admin -----------------
@@ -52,12 +52,12 @@ Authorization: ac7d201e-d9d7-440d-a045-6976f8cc6174
 POST http://localhost:3000/api/admins
 Content-Type: application/json
 Accept: application/json
-Authorization: ac7d201e-d9d7-440d-a045-6976f8cc6174
+Authorization: super-02f371bb-4354-49f6-9082-23f4ab83c4c1
 
 {
-    "username": "admin3",
-    "name": "Eki Budi",
-    "email": "eki@gmail.com",
+    "username": "admin2",
+    "name": "Bayu Prasetyo",
+    "email": "bayu@gmail.com",
     "phone": "08976767566",
     "password": "rahasia",
     "status": false
@@ -68,36 +68,36 @@ Authorization: ac7d201e-d9d7-440d-a045-6976f8cc6174
 GET http://localhost:3000/api/admins/3
 Content-Type: application/json
 Accept: application/json
-Authorization: ac7d201e-d9d7-440d-a045-6976f8cc6174
+Authorization: super-02f371bb-4354-49f6-9082-23f4ab83c4c1
 
 ### Edit admin -----------------
 
-PUT http://localhost:3000/api/admins/2
+PUT http://localhost:3000/api/admins/7
 Content-Type: application/json
 Accept: application/json
-Authorization: ac7d201e-d9d7-440d-a045-6976f8cc6174
+Authorization: super-548251bf-7e32-48d4-b4e1-f2eb85e7357a
 
 {
-    "name": "Bayu",
+    "name": "Bayu Prasetyo",
     "email": "bayu@gmail.com",
-    "phone": "0897976789",
+    "phone": "0879788678",
     "password": "rahasia",
     "status": true
 }
 
 ### Delete Admin --------------
 
-DELETE http://localhost:3000/api/admins/3
+DELETE http://localhost:3000/api/admins/5
 Content-Type: application/json
 Accept: application/json
-Authorization: ac7d201e-d9d7-440d-a045-6976f8cc6174
+Authorization: super-02f371bb-4354-49f6-9082-23f4ab83c4c1
 
 ### Get all Admin --------------
 
 GET http://localhost:3000/api/admins/
 Content-Type: application/json
 Accept: application/json
-Authorization: ac7d201e-d9d7-440d-a045-6976f8cc6174
+Authorization: super-02f371bb-4354-49f6-9082-23f4ab83c4c1
 
 # =========================================================================================
 ### create Doctor -----------------
@@ -167,3 +167,29 @@ Accept: application/json
     "username": "admin2",
     "password": "rahasia"
 }
+
+### logout admin -----------------
+
+DELETE http://localhost:3000/api/admins/logout
+Content-Type: application/json
+Accept: application/json
+Authorization: admin-d9814b77-0fbb-4ba8-b7f1-73f0eca6c8b2
+
+# =============================================================================================
+### login Doctor -----------------
+
+POST http://localhost:3000/api/doctors/login
+Content-Type: application/json
+Accept: application/json
+
+{
+    "username": "doctor002",
+    "password": "rahasia"
+}
+
+### logout Doctor -----------------
+
+DELETE http://localhost:3000/api/doctors/logout
+Content-Type: application/json
+Accept: application/json
+Authorization: doctor-abf9bd17-afd3-417c-8580-af52e3071497
