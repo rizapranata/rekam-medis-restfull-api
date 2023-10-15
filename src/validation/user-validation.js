@@ -1,22 +1,34 @@
 import Joi from "joi";
 
 const registerUserValidation = Joi.object({
-    super_user: Joi.string().max(100).required(),
+    username: Joi.string().max(100).required(),
     password: Joi.string().max(100).required(),
     name: Joi.string().max(100).required(),
+    email: Joi.string().max(200).email().optional(),
+    phone: Joi.string().max(20).optional(),
+    specialist: Joi.string().max(100).optional(),
+    poliName: Joi.string().max(100).optional(),
+    status: Joi.boolean().optional(),
+    role: Joi.string().max(20).required()
 });
 
 const loginUserValidation = Joi.object({
-    super_user: Joi.string().max(100).required(),
+    username: Joi.string().max(100).required(),
     password: Joi.string().max(100).required()
 });
 
 const getUserValidation = Joi.string().max(100).required();
 
 const updateUserValidation = Joi.object({
-    super_user: Joi.string().max(100).required(),
+    username: Joi.string().max(100).required(),
     password: Joi.string().max(100).optional(),
     name: Joi.string().max(100).optional(),
+    email: Joi.string().max(200).email().optional(),
+    phone: Joi.string().max(20).optional(),
+    specialist: Joi.string().max(100).optional(),
+    poliName: Joi.string().max(100).optional(),
+    status: Joi.boolean().optional(),
+    role: Joi.string().max(20).required()
 });
 
 export {

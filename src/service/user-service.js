@@ -10,7 +10,7 @@ const register = async (request) => {
 
     const countUser = await prismaClient.user.count({
         where: {
-            super_user: user.super_user
+            username: user.username
         }
     });
 
@@ -23,8 +23,14 @@ const register = async (request) => {
     return prismaClient.user.create({
         data: user,
         select: {
-            super_user: true,
-            name: true
+            username: true,
+            name: true,
+            email: true,
+            phone: true,
+            specialist: true,
+            poliName: true,
+            status: true,
+            role: true
         }
     });
 }
@@ -34,10 +40,10 @@ const login = async (request) => {
 
     const user = await prismaClient.user.findUnique({
         where: {
-            super_user: loginRequest.super_user
+            username: loginRequest.username
         },
         select: {
-            super_user: true,
+            username: true,
             password: true
         }
     });
@@ -57,7 +63,7 @@ const login = async (request) => {
             token: token
         },
         where: {
-            super_user: user.super_user
+            username: user.username
         },
         select: {
             token: true
@@ -70,11 +76,17 @@ const get = async (username) => {
     
     const user = await prismaClient.user.findUnique({
         where: {
-            super_user: username
+            username: username
         },
         select: {
-            super_user: true,
-            name: true
+            username: true,
+            name: true,
+            email: true,
+            phone: true,
+            specialist: true,
+            poliName: true,
+            status: true,
+            role: true
         }
     });
 
@@ -90,7 +102,7 @@ const update = async (request) => {
 
     const totalUserInDatabase = await prismaClient.user.count({
         where: {
-            super_user: user.super_user
+            username: user.username
         }
     })
 
@@ -102,18 +114,41 @@ const update = async (request) => {
     if (user.name) {
         data.name = user.name
     }
+    if (user.email) {
+        data.email = user.email
+    }
+    if (user.phone) {
+        data.phone = user.phone
+    }
+    if (user.specialist) {
+        data.specialist = user.specialist
+    }
+    if (user.poliName) {
+        data.poliName = user.poliName
+    }
+    if (user.status) {
+        data.status = user.status
+    }
+    if (user.role) {
+        data.role = user.role
+    }
     if (user.password) {
         data.password = await bcrypt.hash(user.password, 10);
     }
 
     return prismaClient.user.update({
         where: {
-            super_user: user.super_user
+            username: user.username
         },
         data: data,
         select: {
-            super_user: true,
             name: true,
+            email: true,
+            phone: true,
+            specialist: true,
+            poliName: true,
+            status: true,
+            role: true
         }
     })
 }
@@ -122,7 +157,7 @@ const logout = async (username) => {
     username = validate(getUserValidation, username);
     const user = await prismaClient.user.findUnique({
         where : {
-            super_user: username
+            username: username
         }
     });
 
@@ -132,13 +167,13 @@ const logout = async (username) => {
 
     return prismaClient.user.update({
         where: {
-            super_user: username
+            username: username
         },
         data: {
             token: null
         },
         select: {
-            super_user: true
+            username: true
         }
     })
 }
