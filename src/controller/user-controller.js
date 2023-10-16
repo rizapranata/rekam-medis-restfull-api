@@ -115,6 +115,36 @@ const remove = async (req, res, next) => {
     }
 }
 
+const search = async (req, res, next) => {
+    let policy = policyFor(req.user);
+    if (!policy.can("read", "User")) {
+        return res.json({
+            error: 1,
+            message: `You're not allowed to perform this action`,
+        })
+    };
+
+    try {
+        const user = req.user;
+        const request = {
+            name: req.query.name,
+            email: req.query.email,
+            phone: req.query.phone,
+            role: req.query.role,
+            page: req.query.page,
+            size: req.query.size
+        };
+
+        const result = await userService.search(user, request);
+        res.status(200).json({
+            data: result.data,
+            paging: result.paging
+        });
+    } catch (e) {
+        next(e)
+    }
+}
+
 export default {
     register,
     login,
@@ -122,5 +152,6 @@ export default {
     update,
     logout,
     create,
-    remove
+    remove,
+    search
 }

@@ -1,6 +1,6 @@
 import { prismaClient } from "../application/database.js";
 import { ResponseError } from "../error/response-error.js";
-import { getUserValidation, loginUserValidation, registerUserValidation, updateUserValidation } from "../validation/user-validation.js"
+import { getUserValidation, loginUserValidation, registerUserValidation, searchUserValidation, updateUserValidation } from "../validation/user-validation.js"
 import { validate } from "../validation/validation.js"
 import bcrypt from "bcrypt";
 import { v4 as uuid } from "uuid";
@@ -229,6 +229,77 @@ const remove = async (username) => {
     })
 }
 
+const search = async (user, request) => {
+    request = validate(searchUserValidation, request);
+
+    // 1 ((page - 1) * size) = 0
+    // 2 ((page - 1) * size) = 10
+    const skip = (request.page - 1) * request.size;
+    
+    const filters = [];
+
+    if (request.username) {
+        filters.push({
+            username: {
+                contains: request.username
+            }
+        })
+    }
+
+    if (request.name) {
+        filters.push({
+            name: {
+                contains: request.name
+            }
+        })
+    }
+
+    if (request.email) {
+        filters.push({
+            email: {
+                contains: request.email
+            }
+        });
+    }
+    if (request.phone) {
+        filters.push({
+            phone: {
+                contains: request.phone
+            }
+        });
+    }
+    if (request.role) {
+        filters.push({
+            role: {
+                contains: request.role
+            }
+        });
+    }
+
+    const username = await prismaClient.user.findMany({
+        where: {
+            AND: filters
+        },
+        take: request.size,
+        skip: skip
+    });
+
+    const totalItems = await prismaClient.user.count({
+        where: {
+            AND: filters
+        }
+    });
+
+    return {
+        data: username,
+        paging: {
+            page: request.page,
+            total_item: totalItems,
+            total_page: Math.ceil(totalItems / request.size)
+        }
+    }
+}
+
 export default {
     register,
     login,
@@ -236,5 +307,6 @@ export default {
     update,
     logout,
     create,
-    remove
+    remove,
+    search
 }

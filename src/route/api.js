@@ -11,6 +11,7 @@ userRouter.patch('/api/users/current', userController.update);
 userRouter.delete('/api/users/logout', userController.logout);
 userRouter.post('/api/users/create', userController.create);
 userRouter.delete('/api/users/delete', userController.remove);
+userRouter.get('/api/users', userController.search);
 
 export {
     userRouter

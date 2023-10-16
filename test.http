@@ -72,7 +72,7 @@ Authorization: b0ba2620-a439-45f3-87e3-816a40b4566d
 GET http://localhost:3000/api/users/current
 Content-Type: application/json
 Accept: application/json
-Authorization: b0ba2620-a439-45f3-87e3-816a40b4566d
+Authorization: fa793429-dd5e-4a26-8c5c-ea2ddec3fbf4
 
 ### Patch current user -----------------
 
@@ -104,10 +104,17 @@ Authorization: b0ba2620-a439-45f3-87e3-816a40b4566d
     "username": "kuncuy"
 }
 
+### get all user ---------------
+
+GET http://localhost:3000/api/users?role=admin
+Content-Type: application/json
+Accept: application/json
+Authorization: fa793429-dd5e-4a26-8c5c-ea2ddec3fbf4
+
 ### logout -----------------
 
 DELETE http://localhost:3000/api/users/logout
 Content-Type: application/json
 Accept: application/json
-Authorization: b0ba2620-a439-45f3-87e3-816a40b4566d
+Authorization: fa793429-dd5e-4a26-8c5c-ea2ddec3fbf4
 
