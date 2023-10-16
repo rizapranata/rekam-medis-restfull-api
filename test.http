@@ -1,20 +1,31 @@
-## create user -----------------
+## register user -----------------
 
 POST http://localhost:3000/api/users
 Content-Type: application/json
 Accept: application/json
 
 {
-    "username": "karina",
+    "username": "kuncuy",
     "password": "rahasia",
-    "name": "Karina Mawardah",
-    "email": "karina@gmail.com",
+    "name": "Riza Pranata",
+    "email": "riza@gmail.com",
     "phone": "08977667778",
     "status": true,
-    "role": "admin"
+    "role": "superAdmin"
 }
 
-### login user -----------------
+### login super user -----------------
+
+POST http://localhost:3000/api/users/login
+Content-Type: application/json
+Accept: application/json
+
+{
+    "username": "rizapranata",
+    "password": "rahasia"
+}
+
+### login admin -----------------
 
 POST http://localhost:3000/api/users/login
 Content-Type: application/json
@@ -25,29 +36,72 @@ Accept: application/json
     "password": "rahasia"
 }
 
+### login doctor -----------------
+
+POST http://localhost:3000/api/users/login
+Content-Type: application/json
+Accept: application/json
+
+{
+    "username": "agus",
+    "password": "rahasia"
+}
+
+
+### create user -----------------
+
+POST http://localhost:3000/api/users/create
+Content-Type: application/json
+Accept: application/json
+Authorization: b0ba2620-a439-45f3-87e3-816a40b4566d
+
+{
+    "username": "budianduk",
+    "password": "rahasia",
+    "name": "Eki Budi",
+    "email": "eki@gmail.com",
+    "phone": "08977667778",
+    "specialist": "-",
+    "poliName": "-",
+    "status": null,
+    "role": "doctor"
+}
+
 ### Get current user -----------------
 
 GET http://localhost:3000/api/users/current
 Content-Type: application/json
 Accept: application/json
-Authorization: 79ffc656-4ef7-47fc-a4d5-77850cd85595
+Authorization: b0ba2620-a439-45f3-87e3-816a40b4566d
 
 ### Patch current user -----------------
 
 PATCH http://localhost:3000/api/users/current
 Content-Type: application/json
 Accept: application/json
-Authorization: 79ffc656-4ef7-47fc-a4d5-77850cd85595
+Authorization: d829a0a3-037e-41fb-b330-43d0e3fbcfa6
 
 {
+    "username": "kuncuy",
     "password": "rahasia",
-    "name": "Karina Mawardah S.Kom",
-    "email": "karina@gmail.com",
+    "name": "Kuncuy Waluyo Sp.A",
+    "email": "kuncuy@gmail.com",
     "phone": "08977667778",
-    "specialist": "-",
-    "poliName": "-",
+    "specialist": "Spesialis Anak",
+    "poliName": "Poli Anak",
     "status": true,
-    "role": "admin"
+    "role": "doctor"
+}
+
+### delete user ---------------
+
+DELETE http://localhost:3000/api/users/delete
+Content-Type: application/json
+Accept: application/json
+Authorization: b0ba2620-a439-45f3-87e3-816a40b4566d
+
+{
+    "username": "kuncuy"
 }
 
 ### logout -----------------
@@ -55,5 +109,5 @@ Authorization: 79ffc656-4ef7-47fc-a4d5-77850cd85595
 DELETE http://localhost:3000/api/users/logout
 Content-Type: application/json
 Accept: application/json
-Authorization: d42409f4-4dc4-45a2-98dc-99b562274f8c
+Authorization: b0ba2620-a439-45f3-87e3-816a40b4566d
 

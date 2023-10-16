@@ -35,6 +35,36 @@ const register = async (request) => {
     });
 }
 
+const create = async (request) => {
+    const user = validate(registerUserValidation, request);
+
+    const countUser = await prismaClient.user.count({
+        where: {
+            username: user.username
+        }
+    });
+
+    if (countUser === 1) {
+        throw new ResponseError(400, "Username already exist")
+    }
+
+    user.password = await bcrypt.hash(user.password, 10)
+
+    return prismaClient.user.create({
+        data: user,
+        select: {
+            username: true,
+            name: true,
+            email: true,
+            phone: true,
+            specialist: true,
+            poliName: true,
+            status: true,
+            role: true
+        }
+    });
+}
+
 const login = async (request) => {
     const loginRequest = validate(loginUserValidation, request);
 
@@ -142,6 +172,7 @@ const update = async (request) => {
         },
         data: data,
         select: {
+            username: true,
             name: true,
             email: true,
             phone: true,
@@ -178,10 +209,32 @@ const logout = async (username) => {
     })
 }
 
+const remove = async (username) => {
+    username = validate(getUserValidation, username);
+
+    const totalUserInDatabase = await prismaClient.user.count({
+        where: {
+            username: username
+        }
+    });
+
+    if (totalUserInDatabase !== 1) {
+        throw new ResponseError(404, "Username is not found");
+    }
+
+    return prismaClient.user.delete({
+        where: {
+            username: username
+        }
+    })
+}
+
 export default {
     register,
     login,
     get,
     update,
-    logout
+    logout,
+    create,
+    remove
 }

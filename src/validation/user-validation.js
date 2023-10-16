@@ -6,9 +6,9 @@ const registerUserValidation = Joi.object({
     name: Joi.string().max(100).required(),
     email: Joi.string().max(200).email().optional(),
     phone: Joi.string().max(20).optional(),
-    specialist: Joi.string().max(100).optional(),
-    poliName: Joi.string().max(100).optional(),
-    status: Joi.boolean().optional(),
+    specialist: Joi.string().max(100).default("-"),
+    poliName: Joi.string().max(100).default("-"),
+    status: Joi.boolean().default(false),
     role: Joi.string().max(20).required()
 });
 
@@ -25,8 +25,8 @@ const updateUserValidation = Joi.object({
     name: Joi.string().max(100).optional(),
     email: Joi.string().max(200).email().optional(),
     phone: Joi.string().max(20).optional(),
-    specialist: Joi.string().max(100).optional(),
-    poliName: Joi.string().max(100).optional(),
+    specialist: Joi.string().max(100).default("-"),
+    poliName: Joi.string().max(100).default("-"),
     status: Joi.boolean().optional(),
     role: Joi.string().max(20).required()
 });
