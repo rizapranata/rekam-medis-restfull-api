@@ -18,10 +18,25 @@ const updatePatientValidation = Joi.object({
     email: Joi.string().max(200).email().optional(),
     phone: Joi.string().max(20).optional(),
     address: Joi.string().max(255).optional()
+});
+
+const getPatientValidation = Joi.number().positive().required();
+
+const searchPatientValidation = Joi.object({
+    page: Joi.number().min(1).positive().default(1),
+    size: Joi.number().min(1).positive().max(100).default(10),
+    name: Joi.string().optional(),
+    gender: Joi.string().optional(),
+    age: Joi.number().positive().optional(),
+    nik: Joi.string().max(30).optional(),
+    email: Joi.string().max(200).email().optional(),
+    phone: Joi.string().max(20).optional(),
 })
 
 export {
     createPatientValidation,
-    updatePatientValidation
+    updatePatientValidation,
+    getPatientValidation,
+    searchPatientValidation
 }
 

@@ -131,27 +131,41 @@ Accept: application/json
 Authorization: b87b8d05-7aa3-4146-a22f-2929df589803
 
 {
-    "name": "Desi Ratna",
-    "gender": "Perempuan",
-    "age": 21,
-    "nik": "347576889759000",
-    "email": "desi@gmail.com",
-    "phone": "0876536734",
-    "address": "JL. Harapan Orang tua No. 12, Kec. Bangga, Kab. Banget, Jawa Kulon"
+    "name": "Ruhut Panjaitan",
+    "gender": "Laki - laki",
+    "age": 59,
+    "nik": "9789588497859",
+    "email": "ruhut@gmail.com",
+    "phone": "086767488785",
+    "address": "JL. Multivers, Kec. Pluto, Kab. Semesta"
 }
+
+### view detail patient --------------
+
+GET http://localhost:3000/api/patients/3
+Content-Type: application/json
+Accept: application/json
+Authorization: b87b8d05-7aa3-4146-a22f-2929df589803
 
 ### update patient -----------------
 
-PUT http://localhost:3000/api/patients/1
+PUT http://localhost:3000/api/patients/3
 Content-Type: application/json
 Accept: application/json
 Authorization: b87b8d05-7aa3-4146-a22f-2929df589803
 
 {
-    "name": "Jajang Suryana",
-    "gender": "Laki - laki",
-    "age": 25,
-    "email": "jajang@gmail.com",
-    "phone": "087866475674",
-    "address": "JL. Mana aja boleh No. 40, Kec. Apapun, Kab. Manapun"
+    "name": "Mega Wati",
+    "gender": "Perempuan",
+    "age": 65,
+    "email": "wati@gmail.com",
+    "phone": "0867647586",
+    "address": "JL. Menceng Raya, Kec. Kalideres, Jakarta Barat"
 }
+
+### get all patient --------------
+
+GET http://localhost:3000/api/patients
+Content-Type: application/json
+Accept: application/json
+Authorization: b87b8d05-7aa3-4146-a22f-2929df589803

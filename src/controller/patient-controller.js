@@ -41,13 +41,60 @@ const update = async (req, res, next) => {
         res.status(200).json({
             data: result
         })
-        
     } catch (e) {
         next(e)
     }
 }
 
+const get = async (req, res, next) => {
+    let policy = policyFor(req.user);
+    if (!policy.can("view", "Patient")) {
+        return res.json({
+            error: 1,
+            message: `You're not allowed to perform this action`,
+        })
+    }
+
+    try {
+        const user = req.user;
+        const patientId = req.params.patientId;
+
+        const result = await patientService.get(user, patientId);
+        res.status(200).json({
+            data: result
+        })
+    } catch (e) {
+        next(e)
+    }
+}
+
+const search = async (req, res, next) => {
+    try {
+        const user = req.user;
+        const request = {
+            name: req.query.name,
+            gender: req.query.gender,
+            age: req.query.age,
+            nik: req.query.nik,
+            email: req.query.email,
+            phone: req.query.phone,
+            page: req.query.page,
+            size: req.query.size
+        };
+
+        const result = await patientService.search(user, request);
+        res.status(200).json({
+            data: result.data,
+            paging: result.paging
+        });
+    } catch (e) {
+        next(e);
+    }
+}
+
 export default {
     create,
-    update
+    update,
+    get,
+    search
 }

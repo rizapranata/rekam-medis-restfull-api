@@ -17,7 +17,8 @@ userRouter.get('/api/users', userController.search);
 // Patient API
 userRouter.post('/api/patients/create', patientController.create);
 userRouter.put('/api/patients/:patientId', patientController.update);
-
+userRouter.get('/api/patients/:patientId', patientController.get);
+userRouter.get('/api/patients', patientController.search);
 
 export {
     userRouter
