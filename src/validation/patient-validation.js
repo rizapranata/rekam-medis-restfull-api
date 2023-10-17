@@ -15,7 +15,6 @@ const updatePatientValidation = Joi.object({
     name: Joi.string().max(100).required(),
     gender: Joi.string().max(20).required(),
     age: Joi.number().positive().required(),
-    nik: Joi.string().max(30).required(),
     email: Joi.string().max(200).email().optional(),
     phone: Joi.string().max(20).optional(),
     address: Joi.string().max(255).optional()

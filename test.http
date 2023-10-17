@@ -55,7 +55,7 @@ Accept: application/json
 POST http://localhost:3000/api/users/create
 Content-Type: application/json
 Accept: application/json
-Authorization: b0ba2620-a439-45f3-87e3-816a40b4566d
+Authorization: b87b8d05-7aa3-4146-a22f-2929df589803
 
 {
     "username": "budianduk",
@@ -138,4 +138,20 @@ Authorization: b87b8d05-7aa3-4146-a22f-2929df589803
     "email": "desi@gmail.com",
     "phone": "0876536734",
     "address": "JL. Harapan Orang tua No. 12, Kec. Bangga, Kab. Banget, Jawa Kulon"
+}
+
+### update patient -----------------
+
+PUT http://localhost:3000/api/patients/1
+Content-Type: application/json
+Accept: application/json
+Authorization: b87b8d05-7aa3-4146-a22f-2929df589803
+
+{
+    "name": "Jajang Suryana",
+    "gender": "Laki - laki",
+    "age": 25,
+    "email": "jajang@gmail.com",
+    "phone": "087866475674",
+    "address": "JL. Mana aja boleh No. 40, Kec. Apapun, Kab. Manapun"
 }
