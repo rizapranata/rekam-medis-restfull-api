@@ -111,7 +111,7 @@ Authorization: b0ba2620-a439-45f3-87e3-816a40b4566d
 GET http://localhost:3000/api/users?role=admin
 Content-Type: application/json
 Accept: application/json
-Authorization: fa793429-dd5e-4a26-8c5c-ea2ddec3fbf4
+Authorization: b87b8d05-7aa3-4146-a22f-2929df589803
 
 ### logout -----------------
 
@@ -166,6 +166,13 @@ Authorization: b87b8d05-7aa3-4146-a22f-2929df589803
 ### get all patient --------------
 
 GET http://localhost:3000/api/patients
+Content-Type: application/json
+Accept: application/json
+Authorization: b87b8d05-7aa3-4146-a22f-2929df589803
+
+### remove patient --------------
+
+DELETE http://localhost:3000/api/patients/2
 Content-Type: application/json
 Accept: application/json
 Authorization: b87b8d05-7aa3-4146-a22f-2929df589803

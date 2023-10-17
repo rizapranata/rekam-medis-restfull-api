@@ -69,6 +69,14 @@ const get = async (req, res, next) => {
 }
 
 const search = async (req, res, next) => {
+    let policy = policyFor(req.user);
+    if (!policy.can("view", "Patient")) {
+        return res.json({
+            error: 1,
+            message: `You're not allowed to perform this action`,
+        })
+    }
+
     try {
         const user = req.user;
         const request = {
@@ -92,9 +100,31 @@ const search = async (req, res, next) => {
     }
 }
 
+const remove = async (req, res, next) => {
+    let policy = policyFor(req.user);
+    if (!policy.can("delete", "Patient")) {
+        return res.json({
+            error: 1,
+            message: `You're not allowed to perform this action`,
+        })
+    }
+
+    try {
+        const user = req.user;
+        const patientId = req.params.patientId;
+        await patientService.remove(user, patientId);
+        res.status(200).json({
+            data: `patient id ${patientId} is already deleted!`
+        })
+    } catch (e) {
+        next(e)
+    }
+}
+
 export default {
     create,
     update,
     get,
-    search
+    search,
+    remove
 }

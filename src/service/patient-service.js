@@ -177,9 +177,32 @@ const search = async (user, request) => {
     }
 }
 
+const remove = async (user, patientId) => {
+    patientId = validate(getPatientValidation, patientId);
+
+    const totalDataInDatabase = await prismaClient.patient.count({
+        where: {
+            username: user.username,
+            id: patientId
+        }
+    });
+
+    if (!totalDataInDatabase) {
+        throw new ResponseError(404, "Patient is not found");
+    }
+
+    return prismaClient.patient.delete({
+        where: {
+            id: patientId
+        }
+    })
+
+}
+
 export default {
     create,
     update,
     get,
-    search
+    search,
+    remove
 }

@@ -18,6 +18,7 @@ userRouter.get('/api/users', userController.search);
 userRouter.post('/api/patients/create', patientController.create);
 userRouter.put('/api/patients/:patientId', patientController.update);
 userRouter.get('/api/patients/:patientId', patientController.get);
+userRouter.delete('/api/patients/:patientId', patientController.remove);
 userRouter.get('/api/patients', patientController.search);
 
 export {
