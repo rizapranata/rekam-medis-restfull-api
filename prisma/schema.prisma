@@ -45,6 +45,7 @@ model Patient {
   name     String  @db.VarChar(100)
   gender   String  @db.VarChar(20)
   age      Int
+  nik      String  @db.VarChar(100)
   email    String? @db.VarChar(200)
   phone    String? @db.VarChar(20)
   address  String? @db.VarChar(225)

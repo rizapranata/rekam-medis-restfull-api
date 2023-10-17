@@ -1,3 +1,5 @@
+## =========================================== - User API - =========================================
+
 ## register user -----------------
 
 POST http://localhost:3000/api/users
@@ -72,7 +74,7 @@ Authorization: b0ba2620-a439-45f3-87e3-816a40b4566d
 GET http://localhost:3000/api/users/current
 Content-Type: application/json
 Accept: application/json
-Authorization: fa793429-dd5e-4a26-8c5c-ea2ddec3fbf4
+Authorization: b87b8d05-7aa3-4146-a22f-2929df589803
 
 ### Patch current user -----------------
 
@@ -116,5 +118,24 @@ Authorization: fa793429-dd5e-4a26-8c5c-ea2ddec3fbf4
 DELETE http://localhost:3000/api/users/logout
 Content-Type: application/json
 Accept: application/json
-Authorization: fa793429-dd5e-4a26-8c5c-ea2ddec3fbf4
+Authorization: b816576f-2e40-492b-acda-f1bf69fea023
 
+## =====================================================================================================
+## =========================================== - Patient API - =========================================
+
+### create patient -----------------
+
+POST http://localhost:3000/api/patients/create
+Content-Type: application/json
+Accept: application/json
+Authorization: b87b8d05-7aa3-4146-a22f-2929df589803
+
+{
+    "name": "Desi Ratna",
+    "gender": "Perempuan",
+    "age": 21,
+    "nik": "347576889759000",
+    "email": "desi@gmail.com",
+    "phone": "0876536734",
+    "address": "JL. Harapan Orang tua No. 12, Kec. Bangga, Kab. Banget, Jawa Kulon"
+}

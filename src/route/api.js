@@ -1,6 +1,7 @@
 import express from "express"
 import { authMiddleware } from "../middleware/auth-middleware.js"
 import userController from "../controller/user-controller.js";
+import patientController from "../controller/patient-controller.js";
 
 const userRouter = new express.Router()
 userRouter.use(authMiddleware)
@@ -12,6 +13,10 @@ userRouter.delete('/api/users/logout', userController.logout);
 userRouter.post('/api/users/create', userController.create);
 userRouter.delete('/api/users/delete', userController.remove);
 userRouter.get('/api/users', userController.search);
+
+// Patient API
+userRouter.post('/api/patients/create', patientController.create);
+
 
 export {
     userRouter
