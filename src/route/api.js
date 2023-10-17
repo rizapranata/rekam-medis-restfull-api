@@ -2,6 +2,7 @@ import express from "express"
 import { authMiddleware } from "../middleware/auth-middleware.js"
 import userController from "../controller/user-controller.js";
 import patientController from "../controller/patient-controller.js";
+import polyclinicController from "../controller/polyclinic-controller.js";
 
 const userRouter = new express.Router()
 userRouter.use(authMiddleware)
@@ -20,6 +21,13 @@ userRouter.put('/api/patients/:patientId', patientController.update);
 userRouter.get('/api/patients/:patientId', patientController.get);
 userRouter.delete('/api/patients/:patientId', patientController.remove);
 userRouter.get('/api/patients', patientController.search);
+
+// Polyclinic API
+userRouter.post('/api/polyclinics/create', polyclinicController.create);
+userRouter.get('/api/polyclinics/:polyId', polyclinicController.get);
+userRouter.put('/api/polyclinics/:polyId', polyclinicController.update);
+userRouter.get('/api/polyclinics', polyclinicController.getAll);
+userRouter.delete('/api/polyclinics/:polyId', polyclinicController.remove);
 
 export {
     userRouter

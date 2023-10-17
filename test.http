@@ -1,19 +1,19 @@
 ## =========================================== - User API - =========================================
 
-## register user -----------------
+## register super admin -----------------
 
 POST http://localhost:3000/api/users
 Content-Type: application/json
 Accept: application/json
 
 {
-    "username": "kuncuy",
+    "username": "joko",
     "password": "rahasia",
-    "name": "Riza Pranata",
-    "email": "riza@gmail.com",
-    "phone": "08977667778",
+    "name": "Joko Tingkir",
+    "email": "joko@gmail.com",
+    "phone": "0897667767657",
     "status": true,
-    "role": "superAdmin"
+    "role": "admin"
 }
 
 ### login super user -----------------
@@ -58,15 +58,15 @@ Accept: application/json
 Authorization: b87b8d05-7aa3-4146-a22f-2929df589803
 
 {
-    "username": "budianduk",
+    "username": "joko",
     "password": "rahasia",
-    "name": "Eki Budi",
-    "email": "eki@gmail.com",
-    "phone": "08977667778",
+    "name": "Joko Tingkir",
+    "email": "joko@gmail.com",
+    "phone": "0897667767657",
     "specialist": "-",
     "poliName": "-",
     "status": null,
-    "role": "doctor"
+    "role": "admin"
 }
 
 ### Get current user -----------------
@@ -74,9 +74,9 @@ Authorization: b87b8d05-7aa3-4146-a22f-2929df589803
 GET http://localhost:3000/api/users/current
 Content-Type: application/json
 Accept: application/json
-Authorization: b87b8d05-7aa3-4146-a22f-2929df589803
+Authorization: c4860963-1341-4c97-9da2-4819ca7ef0fd
 
-### Patch current user -----------------
+### Patch user -----------------
 
 PATCH http://localhost:3000/api/users/current
 Content-Type: application/json
@@ -118,7 +118,7 @@ Authorization: b87b8d05-7aa3-4146-a22f-2929df589803
 DELETE http://localhost:3000/api/users/logout
 Content-Type: application/json
 Accept: application/json
-Authorization: b816576f-2e40-492b-acda-f1bf69fea023
+Authorization: b87b8d05-7aa3-4146-a22f-2929df589803
 
 ## =====================================================================================================
 ## =========================================== - Patient API - =========================================
@@ -128,16 +128,16 @@ Authorization: b816576f-2e40-492b-acda-f1bf69fea023
 POST http://localhost:3000/api/patients/create
 Content-Type: application/json
 Accept: application/json
-Authorization: b87b8d05-7aa3-4146-a22f-2929df589803
+Authorization: c4860963-1341-4c97-9da2-4819ca7ef0fd
 
 {
-    "name": "Ruhut Panjaitan",
+    "name": "Luhut Binsar",
     "gender": "Laki - laki",
-    "age": 59,
-    "nik": "9789588497859",
-    "email": "ruhut@gmail.com",
-    "phone": "086767488785",
-    "address": "JL. Multivers, Kec. Pluto, Kab. Semesta"
+    "age": 58,
+    "nik": "988678676767668",
+    "email": "luhut@gmail.com",
+    "phone": "089766557679",
+    "address": "JL. Metaverst, Kec. Sirampog, Kab. Brebes"
 }
 
 ### view detail patient --------------
@@ -145,14 +145,14 @@ Authorization: b87b8d05-7aa3-4146-a22f-2929df589803
 GET http://localhost:3000/api/patients/3
 Content-Type: application/json
 Accept: application/json
-Authorization: b87b8d05-7aa3-4146-a22f-2929df589803
+Authorization: c4860963-1341-4c97-9da2-4819ca7ef0fd
 
 ### update patient -----------------
 
 PUT http://localhost:3000/api/patients/3
 Content-Type: application/json
 Accept: application/json
-Authorization: b87b8d05-7aa3-4146-a22f-2929df589803
+Authorization: c4860963-1341-4c97-9da2-4819ca7ef0fd
 
 {
     "name": "Mega Wati",
@@ -168,11 +168,60 @@ Authorization: b87b8d05-7aa3-4146-a22f-2929df589803
 GET http://localhost:3000/api/patients
 Content-Type: application/json
 Accept: application/json
-Authorization: b87b8d05-7aa3-4146-a22f-2929df589803
+Authorization: c4860963-1341-4c97-9da2-4819ca7ef0fd
 
 ### remove patient --------------
 
-DELETE http://localhost:3000/api/patients/2
+DELETE http://localhost:3000/api/patients/1
 Content-Type: application/json
 Accept: application/json
-Authorization: b87b8d05-7aa3-4146-a22f-2929df589803
+Authorization: c4860963-1341-4c97-9da2-4819ca7ef0fd
+
+
+## =====================================================================================================
+## =========================================== - Polyclinic API - =========================================
+
+### create poly -----------------
+
+POST http://localhost:3000/api/polyclinics/create
+Content-Type: application/json
+Accept: application/json
+Authorization: c4860963-1341-4c97-9da2-4819ca7ef0fd
+
+{
+    "name": "Poli Mata",
+    "floor": "A2008"
+}
+
+### get poly -----------------
+
+GET http://localhost:3000/api/polyclinics/2
+Content-Type: application/json
+Accept: application/json
+Authorization: c4860963-1341-4c97-9da2-4819ca7ef0fd
+
+### update poly -----------------
+
+PUT http://localhost:3000/api/polyclinics/4
+Content-Type: application/json
+Accept: application/json
+Authorization: c4860963-1341-4c97-9da2-4819ca7ef0fd
+
+{
+    "name": "Poli Mata",
+    "floor": "A2008"
+}
+
+### get all poly -----------------
+
+GET http://localhost:3000/api/polyclinics
+Content-Type: application/json
+Accept: application/json
+Authorization: c4860963-1341-4c97-9da2-4819ca7ef0fd
+
+### delete poly -----------------
+
+DELETE http://localhost:3000/api/polyclinics/4
+Content-Type: application/json
+Accept: application/json
+Authorization: c4860963-1341-4c97-9da2-4819ca7ef0fd

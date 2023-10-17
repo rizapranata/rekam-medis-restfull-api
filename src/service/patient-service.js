@@ -38,7 +38,7 @@ const update = async (user, request) => {
 
     const totalDataInDatabase = await prismaClient.patient.count({
         where: {
-            username: user.username,
+            // username: user.username,
             id: patient.id
         }
     });
@@ -57,7 +57,8 @@ const update = async (user, request) => {
             age: patient.age,
             email: patient.email,
             phone: patient.phone,
-            address: patient.address
+            address: patient.address,
+            username: user.username
         },
         select: {
             id: true,
@@ -78,7 +79,7 @@ const get = async (user, patientId) => {
 
     const patient = await prismaClient.patient.findFirst({
         where: {
-            username: user.username,
+            // username: user.username,
             id: patientId
         },
         select: {
@@ -109,9 +110,9 @@ const search = async (user, request) => {
     
     const filters = [];
 
-    filters.push({
-        username: user.username
-    })
+    // filters.push({
+    //     username: user.username
+    // })
 
     if (request.name) {
         filters.push({
@@ -182,7 +183,7 @@ const remove = async (user, patientId) => {
 
     const totalDataInDatabase = await prismaClient.patient.count({
         where: {
-            username: user.username,
+            // username: user.username,
             id: patientId
         }
     });
