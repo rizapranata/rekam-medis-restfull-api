@@ -3,6 +3,8 @@ import { authMiddleware } from "../middleware/auth-middleware.js"
 import userController from "../controller/user-controller.js";
 import patientController from "../controller/patient-controller.js";
 import polyclinicController from "../controller/polyclinic-controller.js";
+import drugController from "../controller/drug-controller.js";
+import medicalRecordController from "../controller/medicalRecord-controller.js";
 
 const userRouter = new express.Router()
 userRouter.use(authMiddleware)
@@ -28,6 +30,14 @@ userRouter.get('/api/polyclinics/:polyId', polyclinicController.get);
 userRouter.put('/api/polyclinics/:polyId', polyclinicController.update);
 userRouter.get('/api/polyclinics', polyclinicController.getAll);
 userRouter.delete('/api/polyclinics/:polyId', polyclinicController.remove);
+
+//Drug API
+userRouter.post('/api/drugs/create', drugController.create);
+
+// MedicalRecord API
+userRouter.post('/api/medical-records/:patientId', medicalRecordController.create);
+userRouter.get('/api/medical-records', medicalRecordController.search);
+userRouter.delete('/api/medical-records/:medicalRecordId', medicalRecordController.remove);
 
 export {
     userRouter

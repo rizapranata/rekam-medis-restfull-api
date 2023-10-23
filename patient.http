@@ -1,0 +1,56 @@
+## =========================================== - Patient API - =========================================
+
+### create patient -----------------
+
+POST http://localhost:3000/api/patients/create
+Content-Type: application/json
+Accept: application/json
+Authorization: ad0a5e1c-5ae2-4b43-ad08-751fb50d0b62
+
+{
+    "name": "Luhut Panjaitan",
+    "gender": "Laki - laki",
+    "age": 63,
+    "nik": "99585789984",
+    "email": "luhut@gmail.com",
+    "phone": "08987588745",
+    "address": "JL. Pondok No.30, Kec. Bekasi"
+}
+
+### view detail patient --------------
+
+GET http://localhost:3000/api/patients/3
+Content-Type: application/json
+Accept: application/json
+Authorization: c4860963-1341-4c97-9da2-4819ca7ef0fd
+
+### update patient -----------------
+
+PUT http://localhost:3000/api/patients/3
+Content-Type: application/json
+Accept: application/json
+Authorization: c4860963-1341-4c97-9da2-4819ca7ef0fd
+
+{
+    "name": "Mega Wati",
+    "gender": "Perempuan",
+    "age": 65,
+    "email": "wati@gmail.com",
+    "phone": "0867647586",
+    "address": "JL. Menceng Raya, Kec. Kalideres, Jakarta Barat"
+}
+
+### get all patient --------------
+
+GET http://localhost:3000/api/patients
+Content-Type: application/json
+Accept: application/json
+Authorization: ad0a5e1c-5ae2-4b43-ad08-751fb50d0b62
+
+### remove patient --------------
+
+DELETE http://localhost:3000/api/patients/1
+Content-Type: application/json
+Accept: application/json
+Authorization: c4860963-1341-4c97-9da2-4819ca7ef0fd
+

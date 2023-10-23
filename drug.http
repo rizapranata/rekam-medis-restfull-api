@@ -1,0 +1,14 @@
+## =========================================== - Drug API - =========================================
+
+### create drug -----------------
+
+POST http://localhost:3000/api/drugs/create
+Content-Type: application/json
+Accept: application/json
+Authorization: 0f6f8c43-6754-4dd3-84f7-1cd2ee3d2c49
+
+{
+    "name": "Cataplam",
+    "price": 7500,
+    "description": "Obat pereda sakit gigi"
+}
