@@ -1,0 +1,121 @@
+## =========================================== - User API - =========================================
+
+## register super user -----------------
+
+POST http://localhost:3000/api/users
+Content-Type: application/json
+Accept: application/json
+
+{
+    "username": "riza",
+    "password": "rahasia",
+    "name": "Riza Pranata",
+    "email": "riza@gmail.com",
+    "phone": "0897667767657",
+    "status": true,
+    "role": "superAdmin"
+}
+
+### login super user -----------------
+
+POST http://localhost:3000/api/users/login
+Content-Type: application/json
+Accept: application/json
+
+{
+    "username": "riza",
+    "password": "rahasia"
+}
+
+### login admin -----------------
+
+POST http://localhost:3000/api/users/login
+Content-Type: application/json
+Accept: application/json
+
+{
+    "username": "samsul",
+    "password": "rahasia"
+}
+
+### login doctor -----------------
+
+POST http://localhost:3000/api/users/login
+Content-Type: application/json
+Accept: application/json
+
+{
+    "username": "karina",
+    "password": "rahasia"
+}
+
+
+### create user -----------------
+
+POST http://localhost:3000/api/users/create
+Content-Type: application/json
+Accept: application/json
+Authorization: 3f208e07-95a8-4fe6-9856-111979f32fe0
+
+{
+    "username": "karina",
+    "password": "rahasia",
+    "name": "Karina Mawardah",
+    "email": "karina@gmail.com",
+    "phone": "0897767787",
+    "specialist": "Jantung",
+    "poliName": "Poli Jantung",
+    "status": true,
+    "role": "doctor"
+}
+
+### Get current user -----------------
+
+GET http://localhost:3000/api/users/current
+Content-Type: application/json
+Accept: application/json
+Authorization: 8bbf2641-c5a3-4f3d-a737-aa661430a671
+
+### Patch user -----------------
+
+PATCH http://localhost:3000/api/users/current
+Content-Type: application/json
+Accept: application/json
+Authorization: d829a0a3-037e-41fb-b330-43d0e3fbcfa6
+
+{
+    "username": "kuncuy",
+    "password": "rahasia",
+    "name": "Kuncuy Waluyo Sp.A",
+    "email": "kuncuy@gmail.com",
+    "phone": "08977667778",
+    "specialist": "Spesialis Anak",
+    "poliName": "Poli Anak",
+    "status": true,
+    "role": "doctor"
+}
+
+### delete user ---------------
+
+DELETE http://localhost:3000/api/users/delete
+Content-Type: application/json
+Accept: application/json
+Authorization: b0ba2620-a439-45f3-87e3-816a40b4566d
+
+{
+    "username": "kuncuy"
+}
+
+### get all user ---------------
+
+GET http://localhost:3000/api/users?role=admin
+Content-Type: application/json
+Accept: application/json
+Authorization: 3f208e07-95a8-4fe6-9856-111979f32fe0
+
+### logout -----------------
+
+DELETE http://localhost:3000/api/users/logout
+Content-Type: application/json
+Accept: application/json
+Authorization: ad0a5e1c-5ae2-4b43-ad08-751fb50d0b62

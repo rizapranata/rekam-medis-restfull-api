@@ -1,0 +1,48 @@
+## =========================================== - Drug API - =========================================
+
+### create drug -----------------
+
+POST http://localhost:3000/api/drugs/create
+Content-Type: application/json
+Accept: application/json
+Authorization: 0f6f8c43-6754-4dd3-84f7-1cd2ee3d2c49
+
+{
+    "name": "Cataplam",
+    "price": 7500,
+    "description": "Obat pereda sakit gigi"
+}
+
+### get drug -----------------
+
+GET http://localhost:3000/api/drugs/4
+Content-Type: application/json
+Accept: application/json
+Authorization: 0f6f8c43-6754-4dd3-84f7-1cd2ee3d2c49
+
+### update drug -----------------
+
+PUT http://localhost:3000/api/drugs/1
+Content-Type: application/json
+Accept: application/json
+Authorization: 0f6f8c43-6754-4dd3-84f7-1cd2ee3d2c49
+
+{
+    "name": "Actifed",
+    "price": 4500,
+    "description": "Obat keras, butuh anjuran dokter"
+}
+
+### search drug -----------------
+
+GET http://localhost:3000/api/drugs
+Content-Type: application/json
+Accept: application/json
+Authorization: 0f6f8c43-6754-4dd3-84f7-1cd2ee3d2c49
+
+### delete drug -----------------
+
+DELETE http://localhost:3000/api/drugs/2
+Content-Type: application/json
+Accept: application/json
+Authorization: 0f6f8c43-6754-4dd3-84f7-1cd2ee3d2c49

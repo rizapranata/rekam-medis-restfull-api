@@ -1,8 +1,37 @@
+import { policyFor } from "../policy/index.js";
 import userService from "../service/user-service.js"
 
 const register = async (req, res, next) => {
+    let policy = policyFor(req.user);
+    if (!policy.can("create", "User")) {
+        return res.json({
+            error: 1,
+            message: `You're not allowed to perform this action`,
+        })
+    };
+
     try {
         const result = await userService.register(req.body);
+        res.status(200).json({
+            data: result
+        })
+    } catch (e) {
+        next(e)
+    }
+}
+
+const create = async (req, res, next) => {
+    let policy = policyFor(req.user);
+    if (!policy.can("create", "User")) {
+        return res.json({
+            error: 1,
+            message: `You're not allowed to perform this action`,
+        })
+    }
+
+    try {
+        const request = req.body;
+        const result = await userService.register(request);
         res.status(200).json({
             data: result
         })
@@ -24,7 +53,7 @@ const login = async (req, res, next) => {
 
 const get = async (req, res, next) => {
     try {
-        const username = req.user.super_user;
+        const username = req.user.username;
         const result = await userService.get(username);
         res.status(200).json({
             data: result
@@ -35,11 +64,16 @@ const get = async (req, res, next) => {
 }
 
 const update = async (req, res, next) => {
-    try {
-        const username = req.user.super_user;
-        const request = req.body;
-        request.super_user = username;
+    let policy = policyFor(req.user);
+    if (!policy.can("update", "User")) {
+        return res.json({
+            error: 1,
+            message: `You're not allowed to perform this action`,
+        })
+    }
 
+    try {
+        const request = req.body;
         const result = await userService.update(request);
         res.status(200).json({
             data: result
@@ -51,7 +85,7 @@ const update = async (req, res, next) => {
 
 const logout = async (req, res, next) => {
     try {
-        await userService.logout(req.user.super_user);
+        await userService.logout(req.user.username);
         res.status(200).json({
             data: "Ok"
         })
@@ -60,10 +94,64 @@ const logout = async (req, res, next) => {
     }
 }
 
+const remove = async (req, res, next) => {
+    let policy = policyFor(req.user);
+    if (!policy.can("delete", "User")) {
+        return res.json({
+            error: 1,
+            message: `You're not allowed to perform this action`,
+        })
+    };
+
+    try {
+        const user = req.body;
+        await userService.remove(user.username);
+        res.status(200).json({
+            data: `${username} is already deleted!`
+        })
+
+    } catch (e) {
+        next(e)
+    }
+}
+
+const search = async (req, res, next) => {
+    let policy = policyFor(req.user);
+    if (!policy.can("read", "User")) {
+        return res.json({
+            error: 1,
+            message: `You're not allowed to perform this action`,
+        })
+    };
+
+    try {
+        const user = req.user;
+        const request = {
+            name: req.query.name,
+            email: req.query.email,
+            phone: req.query.phone,
+            role: req.query.role,
+            page: req.query.page,
+            size: req.query.size
+        };
+
+        const result = await userService.search(user, request);
+        res.status(200).json({
+            data: result.data,
+            paging: result.paging
+        });
+    } catch (e) {
+        next(e)
+    }
+}
+
 export default {
     register,
     login,
     get,
     update,
-    logout
+    logout,
+    create,
+    remove,
+    search
 }

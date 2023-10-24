@@ -1,6 +1,6 @@
 import { prismaClient } from "../application/database.js";
 import { ResponseError } from "../error/response-error.js";
-import { getUserValidation, loginUserValidation, registerUserValidation, updateUserValidation } from "../validation/user-validation.js"
+import { getUserValidation, loginUserValidation, registerUserValidation, searchUserValidation, updateUserValidation } from "../validation/user-validation.js"
 import { validate } from "../validation/validation.js"
 import bcrypt from "bcrypt";
 import { v4 as uuid } from "uuid";
@@ -10,7 +10,7 @@ const register = async (request) => {
 
     const countUser = await prismaClient.user.count({
         where: {
-            super_user: user.super_user
+            username: user.username
         }
     });
 
@@ -23,8 +23,44 @@ const register = async (request) => {
     return prismaClient.user.create({
         data: user,
         select: {
-            super_user: true,
-            name: true
+            username: true,
+            name: true,
+            email: true,
+            phone: true,
+            specialist: true,
+            poliName: true,
+            status: true,
+            role: true
+        }
+    });
+}
+
+const create = async (request) => {
+    const user = validate(registerUserValidation, request);
+
+    const countUser = await prismaClient.user.count({
+        where: {
+            username: user.username
+        }
+    });
+
+    if (countUser === 1) {
+        throw new ResponseError(400, "Username already exist")
+    }
+
+    user.password = await bcrypt.hash(user.password, 10)
+
+    return prismaClient.user.create({
+        data: user,
+        select: {
+            username: true,
+            name: true,
+            email: true,
+            phone: true,
+            specialist: true,
+            poliName: true,
+            status: true,
+            role: true
         }
     });
 }
@@ -34,10 +70,10 @@ const login = async (request) => {
 
     const user = await prismaClient.user.findUnique({
         where: {
-            super_user: loginRequest.super_user
+            username: loginRequest.username
         },
         select: {
-            super_user: true,
+            username: true,
             password: true
         }
     });
@@ -57,7 +93,7 @@ const login = async (request) => {
             token: token
         },
         where: {
-            super_user: user.super_user
+            username: user.username
         },
         select: {
             token: true
@@ -70,11 +106,17 @@ const get = async (username) => {
     
     const user = await prismaClient.user.findUnique({
         where: {
-            super_user: username
+            username: username
         },
         select: {
-            super_user: true,
-            name: true
+            username: true,
+            name: true,
+            email: true,
+            phone: true,
+            specialist: true,
+            poliName: true,
+            status: true,
+            role: true
         }
     });
 
@@ -90,7 +132,7 @@ const update = async (request) => {
 
     const totalUserInDatabase = await prismaClient.user.count({
         where: {
-            super_user: user.super_user
+            username: user.username
         }
     })
 
@@ -102,18 +144,42 @@ const update = async (request) => {
     if (user.name) {
         data.name = user.name
     }
+    if (user.email) {
+        data.email = user.email
+    }
+    if (user.phone) {
+        data.phone = user.phone
+    }
+    if (user.specialist) {
+        data.specialist = user.specialist
+    }
+    if (user.poliName) {
+        data.poliName = user.poliName
+    }
+    if (user.status) {
+        data.status = user.status
+    }
+    if (user.role) {
+        data.role = user.role
+    }
     if (user.password) {
         data.password = await bcrypt.hash(user.password, 10);
     }
 
     return prismaClient.user.update({
         where: {
-            super_user: user.super_user
+            username: user.username
         },
         data: data,
         select: {
-            super_user: true,
+            username: true,
             name: true,
+            email: true,
+            phone: true,
+            specialist: true,
+            poliName: true,
+            status: true,
+            role: true
         }
     })
 }
@@ -122,7 +188,7 @@ const logout = async (username) => {
     username = validate(getUserValidation, username);
     const user = await prismaClient.user.findUnique({
         where : {
-            super_user: username
+            username: username
         }
     });
 
@@ -132,15 +198,106 @@ const logout = async (username) => {
 
     return prismaClient.user.update({
         where: {
-            super_user: username
+            username: username
         },
         data: {
             token: null
         },
         select: {
-            super_user: true
+            username: true
         }
     })
+}
+
+const remove = async (username) => {
+    username = validate(getUserValidation, username);
+
+    const totalUserInDatabase = await prismaClient.user.count({
+        where: {
+            username: username
+        }
+    });
+
+    if (totalUserInDatabase !== 1) {
+        throw new ResponseError(404, "Username is not found");
+    }
+
+    return prismaClient.user.delete({
+        where: {
+            username: username
+        }
+    })
+}
+
+const search = async (user, request) => {
+    request = validate(searchUserValidation, request);
+
+    // 1 ((page - 1) * size) = 0
+    // 2 ((page - 1) * size) = 10
+    const skip = (request.page - 1) * request.size;
+    
+    const filters = [];
+
+    if (request.username) {
+        filters.push({
+            username: {
+                contains: request.username
+            }
+        })
+    }
+
+    if (request.name) {
+        filters.push({
+            name: {
+                contains: request.name
+            }
+        })
+    }
+
+    if (request.email) {
+        filters.push({
+            email: {
+                contains: request.email
+            }
+        });
+    }
+    if (request.phone) {
+        filters.push({
+            phone: {
+                contains: request.phone
+            }
+        });
+    }
+    if (request.role) {
+        filters.push({
+            role: {
+                contains: request.role
+            }
+        });
+    }
+
+    const username = await prismaClient.user.findMany({
+        where: {
+            AND: filters
+        },
+        take: request.size,
+        skip: skip
+    });
+
+    const totalItems = await prismaClient.user.count({
+        where: {
+            AND: filters
+        }
+    });
+
+    return {
+        data: username,
+        paging: {
+            page: request.page,
+            total_item: totalItems,
+            total_page: Math.ceil(totalItems / request.size)
+        }
+    }
 }
 
 export default {
@@ -148,5 +305,8 @@ export default {
     login,
     get,
     update,
-    logout
+    logout,
+    create,
+    remove,
+    search
 }
