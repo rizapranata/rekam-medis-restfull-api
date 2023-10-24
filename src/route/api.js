@@ -33,6 +33,10 @@ userRouter.delete('/api/polyclinics/:polyId', polyclinicController.remove);
 
 //Drug API
 userRouter.post('/api/drugs/create', drugController.create);
+userRouter.put('/api/drugs/:drugId', drugController.update);
+userRouter.get('/api/drugs/:drugId', drugController.get);
+userRouter.get('/api/drugs', drugController.search)
+userRouter.delete('/api/drugs/:drugId', drugController.remove);
 
 // MedicalRecord API
 userRouter.post('/api/medical-records/:patientId', medicalRecordController.create);

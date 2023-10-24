@@ -55,6 +55,14 @@ const search = async (req, res, next) => {
 }
 
 const remove = async (req, res, next) => {
+    let policy = policyFor(req.user);
+    if (!policy.can("delete", "MedicalRecord")) {
+        return res.json({
+            error: 1,
+            message: `You're not allowed to perform this action`,
+        })
+    }
+
     try {
         const user = req.user;
         const medicalRecordId = req.params.medicalRecordId;
