@@ -42,6 +42,8 @@ userRouter.delete('/api/drugs/:drugId', drugController.remove);
 userRouter.post('/api/medical-records/:patientId', medicalRecordController.create);
 userRouter.get('/api/medical-records', medicalRecordController.search);
 userRouter.delete('/api/medical-records/:medicalRecordId', medicalRecordController.remove);
+userRouter.put('/api/medical-records/:medicalRecordId', medicalRecordController.update);
+userRouter.get('/api/medical-records/:medicalRecordId', medicalRecordController.get);
 
 export {
     userRouter

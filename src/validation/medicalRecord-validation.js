@@ -2,7 +2,15 @@ import Joi from "joi";
 import JoiDate from "@joi/date";
 const joiDateUse = Joi.extend(JoiDate);
 
-const MRValidation = Joi.object({
+const createMRValidation = Joi.object({
+    problem: Joi.string().max(100).required(),
+    diagnosis: Joi.string().max(200).required(),
+    note: Joi.string().max(255).optional(),
+    drugs: Joi.number().positive().optional()
+});
+
+const updateMRValidation = Joi.object({
+    id: Joi.number().positive().required(),
     problem: Joi.string().max(100).required(),
     diagnosis: Joi.string().max(200).required(),
     note: Joi.string().max(255).optional(),
@@ -15,10 +23,11 @@ const searchMRValidation = Joi.object({
     nik: Joi.string().max(30).optional(),
 });
 
-const removeMRValidation = Joi.number().positive().required();
+const getMRValidation = Joi.number().positive().required();
 
 export {
-    MRValidation,
+    createMRValidation,
     searchMRValidation,
-    removeMRValidation
+    getMRValidation,
+    updateMRValidation
 }

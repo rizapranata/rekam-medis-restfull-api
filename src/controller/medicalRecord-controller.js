@@ -26,6 +26,38 @@ const create = async (req, res, next) => {
     }
 }
 
+const update = async (req, res, next) => {
+    try {
+        const user = req.user;
+        const request = req.body;
+        const medicalRecordId = req.params.medicalRecordId;
+        request.id = medicalRecordId;
+
+        const result = await medicalRecordService.update(user, request);
+        res.status(200).json({
+            data: result
+        })
+    } catch (e) {
+        next(e)
+    }
+}
+
+const get = async (req, res, next) => {
+    try {
+        const user = req.user;
+        const medicalRecordId = req.params.medicalRecordId;
+
+        const result = await medicalRecordService.get(user, medicalRecordId);
+        res.status(200).json({
+            status: "success",
+            message: "get medical record successful",
+            data: result
+        })
+    } catch (e) {
+        next(e)
+    }
+}
+
 const search = async (req, res, next) => {
     let policy = policyFor(req.user);
     if (!policy.can("view", "MedicalRecord")) {
@@ -46,7 +78,7 @@ const search = async (req, res, next) => {
         const result = await medicalRecordService.search(user, request);
         res.status(200).json({
             status: "success",
-            message: "create medical record successful",
+            message: "get all medical records successful",
             data: result
         })
     } catch (e) {
@@ -78,5 +110,7 @@ const remove = async (req, res, next) => {
 export default {
     create,
     search,
-    remove
+    remove,
+    update,
+    get
 }

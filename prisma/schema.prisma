@@ -31,11 +31,12 @@ model User {
 }
 
 model Polyclinic {
-  id       Int    @id @default(autoincrement())
-  name     String @db.VarChar(100)
-  floor    String @db.VarChar(100)
-  username String @db.VarChar(100)
-  user     User   @relation(fields: [username], references: [username])
+  id       Int      @id @default(autoincrement())
+  name     String   @db.VarChar(100)
+  floor    String   @db.VarChar(100)
+  username String   @db.VarChar(100)
+  user     User     @relation(fields: [username], references: [username])
+  patient  Patient?
 
   @@map("polyclinics")
 }
@@ -52,6 +53,8 @@ model Patient {
   username      String         @db.VarChar(100)
   user          User           @relation(fields: [username], references: [username])
   medicalRecord MedicalRecord?
+  polyClinicId  Int?           @unique
+  polyClinic    Polyclinic?    @relation(fields: [polyClinicId], references: [id])
 
   @@map("patients")
 }

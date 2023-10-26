@@ -1,11 +1,13 @@
 import { prismaClient } from "../application/database.js";
 import { ResponseError } from "../error/response-error.js";
-import { MRValidation, removeMRValidation, searchMRValidation } from "../validation/medicalRecord-validation.js"
+import { createMRValidation, getMRValidation, searchMRValidation, updateMRValidation } from "../validation/medicalRecord-validation.js"
 import { validate } from "../validation/validation.js"
 
 const create = async (user, request, patientId) => {
-    const medicalRecord = validate(MRValidation, request);
+    const medicalRecord = validate(createMRValidation, request);
     medicalRecord.username = user.username;
+
+    console.log("result MR:", medicalRecord);
 
     //check data patient 
     const totalDataPatient = await prismaClient.patient.count({
@@ -24,17 +26,16 @@ const create = async (user, request, patientId) => {
         },
     })
 
-    const historyRecord = await prismaClient.medicalRecord.count({
+    const drug = await prismaClient.drug.findUnique({ //! masi ada issue
         where: {
-            patientId: patientId
+            medical_record_id: medicalRecord.id
         }
-    });
+    })
 
-    if (historyRecord === 1) {
-        throw new ResponseError(404, "Medical records patient is already");
-    }
+    console.log("drug:", drug);
 
     medicalRecord.patientId = patient.id;
+    medicalRecord.drugs = drug.id
 
     return prismaClient.medicalRecord.create({
         data: medicalRecord,
@@ -44,11 +45,68 @@ const create = async (user, request, patientId) => {
             problem: true,
             diagnosis: true,
             note: true,
+            drugs: true,    
             createdAt: true,
             updatedAt: true,
             username: true
         }
     })
+}
+
+const update = async (user, request) => {
+    const medicalRecord = validate(updateMRValidation, request);
+
+    const totalDataInDatabase = await prismaClient.medicalRecord.count({
+        where: {
+            id: medicalRecord.id
+        }
+    });
+
+    if (totalDataInDatabase !== 1) {
+        throw new ResponseError(404, "Medical record is not found")
+    }
+
+    return prismaClient.medicalRecord.update({
+        where: {
+            id: medicalRecord.id
+        },
+        data: {
+            id: medicalRecord.id,
+            problem: medicalRecord.problem,
+            diagnosis: medicalRecord.diagnosis,
+            note: medicalRecord.note,
+            username: user.username
+        }
+    })
+}
+
+const get = async (user, medicalRecordId) => {
+    medicalRecordId = validate(getMRValidation, medicalRecordId);
+
+    const totalDataInDatabase = await prismaClient.medicalRecord.count({
+        where: {
+            username: user.username,
+            id: medicalRecordId
+        }
+    })
+
+    if (totalDataInDatabase !== 1) {
+        throw new ResponseError(404, "Medical record is not found")
+    }
+
+    return prismaClient.medicalRecord.findUnique({
+        where: {
+            id: medicalRecordId
+        },
+        select: { 
+            id: true,
+            problem: true,
+            diagnosis: true,
+            patient: true
+        }
+    })
+
+
 }
 
 const search = async (user, request) => {
@@ -111,7 +169,7 @@ const search = async (user, request) => {
 }
 
 const remove = async (user, medicalRecordId) => {
-    medicalRecordId = validate(removeMRValidation, medicalRecordId);
+    medicalRecordId = validate(getMRValidation, medicalRecordId);
 
     const totalDataInDatabase = await prismaClient.medicalRecord.count({
         where: {
@@ -134,5 +192,7 @@ const remove = async (user, medicalRecordId) => {
 export default {
     create,
     search,
-    remove
+    remove,
+    update,
+    get
 }

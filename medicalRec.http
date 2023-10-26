@@ -8,16 +8,44 @@ Content-Type: application/json
 Accept: application/json
 
 {
-    "username": "agus",
+    "username": "karina",
     "password": "rahasia"
 }
 
 ### create Medical Record -----------------
 
-POST http://localhost:3000/api/medical-records/1
+POST http://localhost:3000/api/medical-records/2
 Content-Type: application/json
 Accept: application/json
-Authorization: 94f80a96-6777-487d-95f5-a575c74d446b
+Authorization: b10a2e92-1825-4c45-b0cd-e1dc82879652
+
+{
+    "problem": "Gagal jantung",
+    "diagnosis": "Jantung lemah",
+    "note": "Ini adalah catatan penyakit jantung",
+    "drugs": 3
+}
+
+### Get all Medical Record -----------------
+
+GET http://localhost:3000/api/medical-records
+Content-Type: application/json
+Accept: application/json
+Authorization: b10a2e92-1825-4c45-b0cd-e1dc82879652
+
+### Get detail Medical Record -----------------
+
+GET http://localhost:3000/api/medical-records/4
+Content-Type: application/json
+Accept: application/json
+Authorization: b10a2e92-1825-4c45-b0cd-e1dc82879652
+
+### update Medical Record -----------------
+
+PUT http://localhost:3000/api/medical-records/
+Content-Type: application/json
+Accept: application/json
+Authorization: b10a2e92-1825-4c45-b0cd-e1dc82879652
 
 {
     "problem": "Gagal jantung",
@@ -26,23 +54,16 @@ Authorization: 94f80a96-6777-487d-95f5-a575c74d446b
     "drugs": [2, 3]
 }
 
-### Get all Medical Record -----------------
-
-GET http://localhost:3000/api/medical-records
-Content-Type: application/json
-Accept: application/json
-Authorization: 94f80a96-6777-487d-95f5-a575c74d446b
-
 ### Delete Medical records -----------------
 
 DELETE http://localhost:3000/api/medical-records/2
 Content-Type: application/json
 Accept: application/json
-Authorization: 94f80a96-6777-487d-95f5-a575c74d446b
+Authorization: b10a2e92-1825-4c45-b0cd-e1dc82879652
 
 ### logout -----------------
 
 DELETE http://localhost:3000/api/users/logout
 Content-Type: application/json
 Accept: application/json
-Authorization: 94f80a96-6777-487d-95f5-a575c74d446b
+Authorization: b10a2e92-1825-4c45-b0cd-e1dc82879652
