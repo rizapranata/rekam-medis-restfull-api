@@ -28,6 +28,7 @@ const create = async (user, request) => {
             email: true,
             phone: true,
             address: true,
+            polyclinic: true,
             username: true
         }
     })
@@ -58,6 +59,7 @@ const update = async (user, request) => {
             email: patient.email,
             phone: patient.phone,
             address: patient.address,
+            polyclinic: patient.polyclinic,
             username: user.username
         },
         select: {

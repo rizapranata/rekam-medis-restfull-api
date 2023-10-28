@@ -7,7 +7,8 @@ const createPatientValidation = Joi.object({
     nik: Joi.string().max(30).required(),
     email: Joi.string().max(200).email().optional(),
     phone: Joi.string().max(20).optional(),
-    address: Joi.string().max(255).optional()
+    address: Joi.string().max(255).optional(),
+    polyclinic: Joi.string().max(100).required()
 });
 
 const updatePatientValidation = Joi.object({
@@ -18,6 +19,7 @@ const updatePatientValidation = Joi.object({
     email: Joi.string().max(200).email().optional(),
     phone: Joi.string().max(20).optional(),
     address: Joi.string().max(255).optional(),
+    polyclinic: Joi.string().max(100).required(),
     username: Joi.string().max(100).optional()
 });
 

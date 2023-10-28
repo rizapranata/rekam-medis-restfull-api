@@ -31,12 +31,11 @@ model User {
 }
 
 model Polyclinic {
-  id       Int      @id @default(autoincrement())
-  name     String   @db.VarChar(100)
-  floor    String   @db.VarChar(100)
-  username String   @db.VarChar(100)
-  user     User     @relation(fields: [username], references: [username])
-  patient  Patient?
+  id       Int    @id @default(autoincrement())
+  name     String @db.VarChar(100)
+  floor    String @db.VarChar(100)
+  username String @db.VarChar(100)
+  user     User   @relation(fields: [username], references: [username])
 
   @@map("polyclinics")
 }
@@ -50,11 +49,10 @@ model Patient {
   email         String?        @db.VarChar(200)
   phone         String?        @db.VarChar(20)
   address       String?        @db.VarChar(225)
+  polyclinic    String         @db.VarChar(100)
   username      String         @db.VarChar(100)
   user          User           @relation(fields: [username], references: [username])
   medicalRecord MedicalRecord?
-  polyClinicId  Int?           @unique
-  polyClinic    Polyclinic?    @relation(fields: [polyClinicId], references: [id])
 
   @@map("patients")
 }
@@ -67,25 +65,25 @@ model MedicalRecord {
   createdAt    DateTime            @default(now())
   updatedAt    DateTime            @updatedAt
   transaction  Transaction?
-  drugs        Drug[]
   transactions MedicalTransaction?
   username     String              @db.VarChar(100)
   user         User                @relation(fields: [username], references: [username])
   patientId    Int?                @unique
   patient      Patient?            @relation(fields: [patientId], references: [id])
+  drugId       Int?                @unique
+  drug         Drug?               @relation(fields: [drugId], references: [id])
 
   @@map("medical_records")
 }
 
 model Drug {
-  id                Int            @id @default(autoincrement())
-  name              String         @db.VarChar(100)
-  price             Int
-  description       String?        @db.VarChar(225)
-  username          String         @db.VarChar(100)
-  user              User           @relation(fields: [username], references: [username])
-  medical_record_id Int?
-  medical_record    MedicalRecord? @relation(fields: [medical_record_id], references: [id])
+  id            Int            @id @default(autoincrement())
+  name          String         @db.VarChar(100)
+  price         Int
+  description   String?        @db.VarChar(225)
+  username      String         @db.VarChar(100)
+  user          User           @relation(fields: [username], references: [username])
+  medicalRecord MedicalRecord?
 
   @@map("drugs")
 }

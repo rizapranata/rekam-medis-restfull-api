@@ -27,6 +27,14 @@ const create = async (req, res, next) => {
 }
 
 const update = async (req, res, next) => {
+    let policy = policyFor(req.user);
+    if (!policy.can("update", "MedicalRecord")) {
+        return res.json({
+            error: 1,
+            message: `You're not allowed to perform this action`,
+        })
+    }
+
     try {
         const user = req.user;
         const request = req.body;
@@ -43,6 +51,14 @@ const update = async (req, res, next) => {
 }
 
 const get = async (req, res, next) => {
+    let policy = policyFor(req.user);
+    if (!policy.can("read", "MedicalRecord")) {
+        return res.json({
+            error: 1,
+            message: `You're not allowed to perform this action`,
+        })
+    }
+
     try {
         const user = req.user;
         const medicalRecordId = req.params.medicalRecordId;
@@ -100,6 +116,8 @@ const remove = async (req, res, next) => {
         const medicalRecordId = req.params.medicalRecordId;
         await medicalRecordService.remove(user, medicalRecordId);
         res.status(200).json({
+            status: "success",
+            message: "delete medical record successful",
             data: `medical record with id ${medicalRecordId} is already deleted!`
         })
     } catch (e) {

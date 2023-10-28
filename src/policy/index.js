@@ -25,6 +25,8 @@ const policies = {
         can("create", "MedicalRecord", {user_id: user.username});
         can("read", "MedicalRecord", {user_id: user.username});
         can("update", "MedicalRecord", {user_id: user.username});
+        can("read", "MedicalRecord", {user_id: user.username});
+        can("view", "MedicalRecord");
     },
 
     doctor(user, {can}) {

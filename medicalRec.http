@@ -14,16 +14,16 @@ Accept: application/json
 
 ### create Medical Record -----------------
 
-POST http://localhost:3000/api/medical-records/2
+POST http://localhost:3000/api/medical-records/1
 Content-Type: application/json
 Accept: application/json
-Authorization: b10a2e92-1825-4c45-b0cd-e1dc82879652
+Authorization: 88d29480-efb1-4cb6-88a1-1e6f37933b3a
 
 {
-    "problem": "Gagal jantung",
-    "diagnosis": "Jantung lemah",
-    "note": "Ini adalah catatan penyakit jantung",
-    "drugs": 3
+    "problem": "Gusi Bengkak",
+    "diagnosis": "Gejala penumbuhan gigi bungsu",
+    "note": "Ini adalah catatan penyakit gejala gigi bungsu tumbuh",
+    "drugId": 1
 }
 
 ### Get all Medical Record -----------------
@@ -31,39 +31,39 @@ Authorization: b10a2e92-1825-4c45-b0cd-e1dc82879652
 GET http://localhost:3000/api/medical-records
 Content-Type: application/json
 Accept: application/json
-Authorization: b10a2e92-1825-4c45-b0cd-e1dc82879652
+Authorization: 88d29480-efb1-4cb6-88a1-1e6f37933b3a
 
 ### Get detail Medical Record -----------------
 
 GET http://localhost:3000/api/medical-records/4
 Content-Type: application/json
 Accept: application/json
-Authorization: b10a2e92-1825-4c45-b0cd-e1dc82879652
+Authorization: 88d29480-efb1-4cb6-88a1-1e6f37933b3a
 
 ### update Medical Record -----------------
 
-PUT http://localhost:3000/api/medical-records/
+PUT http://localhost:3000/api/medical-records/5
 Content-Type: application/json
 Accept: application/json
-Authorization: b10a2e92-1825-4c45-b0cd-e1dc82879652
+Authorization: 88d29480-efb1-4cb6-88a1-1e6f37933b3a
 
 {
     "problem": "Gagal jantung",
-    "diagnosis": "Jantung lemah",
+    "diagnosis": "jantung lemah banget",
     "note": "Ini adalah catatan penyakit jantung",
-    "drugs": [2, 3]
+    "drugId": 3
 }
 
 ### Delete Medical records -----------------
 
-DELETE http://localhost:3000/api/medical-records/2
+DELETE http://localhost:3000/api/medical-records/4
 Content-Type: application/json
 Accept: application/json
-Authorization: b10a2e92-1825-4c45-b0cd-e1dc82879652
+Authorization: 88d29480-efb1-4cb6-88a1-1e6f37933b3a
 
 ### logout -----------------
 
 DELETE http://localhost:3000/api/users/logout
 Content-Type: application/json
 Accept: application/json
-Authorization: b10a2e92-1825-4c45-b0cd-e1dc82879652
+Authorization: 88d29480-efb1-4cb6-88a1-1e6f37933b3a

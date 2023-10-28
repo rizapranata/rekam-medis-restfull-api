@@ -6,7 +6,7 @@ const createMRValidation = Joi.object({
     problem: Joi.string().max(100).required(),
     diagnosis: Joi.string().max(200).required(),
     note: Joi.string().max(255).optional(),
-    drugs: Joi.number().positive().optional()
+    drugId: Joi.number().positive().optional()
 });
 
 const updateMRValidation = Joi.object({
@@ -14,6 +14,7 @@ const updateMRValidation = Joi.object({
     problem: Joi.string().max(100).required(),
     diagnosis: Joi.string().max(200).required(),
     note: Joi.string().max(255).optional(),
+    drugId: Joi.number().positive().optional()
 });
 
 const searchMRValidation = Joi.object({
