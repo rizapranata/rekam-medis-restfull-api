@@ -14,16 +14,18 @@ Accept: application/json
 
 ### create Medical Record -----------------
 
-POST http://localhost:3000/api/medical-records/1
+POST http://localhost:3000/api/medical-records/3
 Content-Type: application/json
 Accept: application/json
-Authorization: 88d29480-efb1-4cb6-88a1-1e6f37933b3a
+Authorization: 17e8106f-3f6a-4479-811f-d375795b17cd
 
 {
-    "problem": "Gusi Bengkak",
-    "diagnosis": "Gejala penumbuhan gigi bungsu",
-    "note": "Ini adalah catatan penyakit gejala gigi bungsu tumbuh",
-    "drugId": 1
+    "problem": "Darah rendah",
+    "diagnosis": "Jantung lemah memompa darah",
+    "note": "Ini adalah catatan penyakit jantung",
+    "drugItems": [
+        {"drugSelectedId": 1}
+    ]
 }
 
 ### Get all Medical Record -----------------
@@ -31,39 +33,42 @@ Authorization: 88d29480-efb1-4cb6-88a1-1e6f37933b3a
 GET http://localhost:3000/api/medical-records
 Content-Type: application/json
 Accept: application/json
-Authorization: 88d29480-efb1-4cb6-88a1-1e6f37933b3a
+Authorization: 17e8106f-3f6a-4479-811f-d375795b17cd
 
 ### Get detail Medical Record -----------------
 
-GET http://localhost:3000/api/medical-records/4
+GET http://localhost:3000/api/medical-records/16
 Content-Type: application/json
 Accept: application/json
-Authorization: 88d29480-efb1-4cb6-88a1-1e6f37933b3a
+Authorization: 17e8106f-3f6a-4479-811f-d375795b17cd
 
 ### update Medical Record -----------------
 
-PUT http://localhost:3000/api/medical-records/5
+PUT http://localhost:3000/api/medical-records/16
 Content-Type: application/json
 Accept: application/json
-Authorization: 88d29480-efb1-4cb6-88a1-1e6f37933b3a
+Authorization: 17e8106f-3f6a-4479-811f-d375795b17cd
 
 {
-    "problem": "Gagal jantung",
-    "diagnosis": "jantung lemah banget",
+    "problem": "Sesak nafas",
+    "diagnosis": "Pemompa darah kurang maksimal berfungsi",
     "note": "Ini adalah catatan penyakit jantung",
-    "drugId": 3
+    "drugItems": [
+        {"drugSelectedId": 2},
+        {"drugSelectedId": 3}
+    ]
 }
 
 ### Delete Medical records -----------------
 
-DELETE http://localhost:3000/api/medical-records/4
+DELETE http://localhost:3000/api/medical-records/6
 Content-Type: application/json
 Accept: application/json
-Authorization: 88d29480-efb1-4cb6-88a1-1e6f37933b3a
+Authorization: 17e8106f-3f6a-4479-811f-d375795b17cd
 
 ### logout -----------------
 
 DELETE http://localhost:3000/api/users/logout
 Content-Type: application/json
 Accept: application/json
-Authorization: 88d29480-efb1-4cb6-88a1-1e6f37933b3a
+Authorization: f20e3afb-eadf-4652-bd6e-f4a6b33674ae

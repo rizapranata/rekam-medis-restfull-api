@@ -15,7 +15,7 @@ const create = async (user, request, patientId) => {
     })
 
     if (totalDataPatient < 1) {
-        throw new ResponseError(404, "Patient is not found");
+        throw new ResponseError(404, "Patient record is not found");
     }
 
     const patient = await prismaClient.patient.findUnique({
@@ -23,26 +23,17 @@ const create = async (user, request, patientId) => {
             id: patientId
         },
     })
-
-    if (!patient) {
-        throw new ResponseError(404, "Patient is not found");
-    }
-
-    const drug = await prismaClient.drug.findUnique({
-        where: {
-            id: medicalRecord.drugId
-        }
-    })
-
-    if (!drug) {
-        throw new ResponseError(404, "Drug is not found");
-    }
+   
+    let drugList = [];
+     medicalRecord.drugItems.map((item) => {
+        drugList.push(item)
+    });
 
     medicalRecord.patientId = patient.id;
-    medicalRecord.drugId = drug.id
-
-    console.log("data mr:", medicalRecord);
-
+    medicalRecord.drugItems = {
+        create: drugList
+    }
+   
     return prismaClient.medicalRecord.create({
         data: medicalRecord,
         select: {
@@ -51,7 +42,8 @@ const create = async (user, request, patientId) => {
             problem: true,
             diagnosis: true,
             note: true,
-            drugId: true,    
+            patient: true,
+            drugItems: true,    
             createdAt: true,
             updatedAt: true,
             username: true
@@ -72,16 +64,6 @@ const update = async (user, request) => {
         throw new ResponseError(404, "Medical record is not found")
     }
 
-    const drug = await prismaClient.drug.findUnique({
-        where: {
-            id: medicalRecord.drugId
-        }
-    })
-
-    if (!drug) {
-        throw new ResponseError(404, "Drug is not found");
-    }
-
     return prismaClient.medicalRecord.update({
         where: {
             id: medicalRecord.id
@@ -91,16 +73,7 @@ const update = async (user, request) => {
             problem: medicalRecord.problem,
             diagnosis: medicalRecord.diagnosis,
             note: medicalRecord.note,
-            drugId: medicalRecord.drugId,
             username: user.username
-        },
-        select: {
-            id: true,
-            problem: true,
-            diagnosis: true,
-            note: true,
-            drugId: true,
-            username: true
         }
     })
 }
@@ -127,8 +100,9 @@ const get = async (user, medicalRecordId) => {
             id: true,
             problem: true,
             diagnosis: true,
+            note: true,
             patient: true,
-            drug: true
+            drugItems: true
         }
     })
 }
@@ -163,6 +137,8 @@ const search = async (user, request) => {
     }
 
     console.log("isi Filters:", filters);
+
+
     const medicalRecords = await prismaClient.medicalRecord.findMany({
         where: {
             AND: filters
@@ -171,7 +147,7 @@ const search = async (user, request) => {
         skip: skip,
         include: {
             patient: true,
-            drug: true
+            drugItems: true,
         }
     });
 
