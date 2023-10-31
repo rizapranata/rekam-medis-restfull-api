@@ -6,11 +6,11 @@
 POST http://localhost:3000/api/polyclinics/create
 Content-Type: application/json
 Accept: application/json
-Authorization: 2c79c69b-354f-41ea-ad86-2b6a5a4defbd
+Authorization: fd536f12-3023-4af5-8028-8e6ba6cb4c33
 
 {
-    "name": "Poli Gigi",
-    "floor": "A2002"
+    "name": "Poli Umum",
+    "floor": "A2007"
 }
 
 ### get poly -----------------
@@ -18,14 +18,14 @@ Authorization: 2c79c69b-354f-41ea-ad86-2b6a5a4defbd
 GET http://localhost:3000/api/polyclinics/2
 Content-Type: application/json
 Accept: application/json
-Authorization: 2c79c69b-354f-41ea-ad86-2b6a5a4defbd
+Authorization: 7d5793e7-5c70-4c63-bdd6-77ed7662adeb
 
 ### update poly -----------------
 
 PUT http://localhost:3000/api/polyclinics/4
 Content-Type: application/json
 Accept: application/json
-Authorization: 2c79c69b-354f-41ea-ad86-2b6a5a4defbd
+Authorization: 7d5793e7-5c70-4c63-bdd6-77ed7662adeb
 
 {
     "name": "Poli Mata",
@@ -37,27 +37,11 @@ Authorization: 2c79c69b-354f-41ea-ad86-2b6a5a4defbd
 GET http://localhost:3000/api/polyclinics
 Content-Type: application/json
 Accept: application/json
-Authorization: 2c79c69b-354f-41ea-ad86-2b6a5a4defbd
+Authorization: fd536f12-3023-4af5-8028-8e6ba6cb4c33
 
 ### delete poly -----------------
 
 DELETE http://localhost:3000/api/polyclinics/4
 Content-Type: application/json
 Accept: application/json
-Authorization: 2c79c69b-354f-41ea-ad86-2b6a5a4defbd
-
-
-## =========================================== - Drug API - =========================================
-
-### create drug -----------------
-
-POST http://localhost:3000/api/drugs/create
-Content-Type: application/json
-Accept: application/json
-Authorization: 0f6f8c43-6754-4dd3-84f7-1cd2ee3d2c49
-
-{
-    "name": "Actifed",
-    "price": 20000,
-    "description": "Jangan mengonsumsi suatu obat jika alergi terhadap obat tersebut atau sejenisnya, sebelum membicarakannya dengan dokter."
-}
+Authorization: 19ab99eb-419e-49d1-9f9a-059ed1228c7c

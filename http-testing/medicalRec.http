@@ -14,10 +14,10 @@ Accept: application/json
 
 ### create Medical Record -----------------
 
-POST http://localhost:3000/api/medical-records/3
+POST http://localhost:3000/api/medical-records/1
 Content-Type: application/json
 Accept: application/json
-Authorization: 5328135c-3c3b-4222-b425-ff8655461319
+Authorization: "b02555f8-e379-463f-9667-cf7b961d669f"
 
 {
     "problem": "Darah rendah",
@@ -33,21 +33,21 @@ Authorization: 5328135c-3c3b-4222-b425-ff8655461319
 GET http://localhost:3000/api/medical-records
 Content-Type: application/json
 Accept: application/json
-Authorization: 5328135c-3c3b-4222-b425-ff8655461319
+Authorization: "1f675c28-393c-4804-a149-aafab3dd483e"
 
 ### Get detail Medical Record -----------------
 
-GET http://localhost:3000/api/medical-records/16
+GET http://localhost:3000/api/medical-records/1
 Content-Type: application/json
 Accept: application/json
-Authorization: 5328135c-3c3b-4222-b425-ff8655461319
+Authorization: "b02555f8-e379-463f-9667-cf7b961d669f"
 
 ### update Medical Record -----------------
 
 PUT http://localhost:3000/api/medical-records/16
 Content-Type: application/json
 Accept: application/json
-Authorization: 5328135c-3c3b-4222-b425-ff8655461319
+Authorization: "b02555f8-e379-463f-9667-cf7b961d669f"
 
 {
     "problem": "Sesak nafas",
@@ -64,7 +64,7 @@ Authorization: 5328135c-3c3b-4222-b425-ff8655461319
 DELETE http://localhost:3000/api/medical-records/6
 Content-Type: application/json
 Accept: application/json
-Authorization: 5328135c-3c3b-4222-b425-ff8655461319
+Authorization: "1f675c28-393c-4804-a149-aafab3dd483e"
 
 ### logout -----------------
 

@@ -7,6 +7,8 @@ const create = async (user, request) => {
     const patient = validate(createPatientValidation, request);
     patient.username = user.username;
 
+    console.log("request patient:", patient);
+
     const countPatient = await prismaClient.patient.count({
         where: {
             nik: patient.nik
@@ -28,7 +30,7 @@ const create = async (user, request) => {
             email: true,
             phone: true,
             address: true,
-            polyclinic: true,
+            poly: true,
             username: true
         }
     })
@@ -59,7 +61,7 @@ const update = async (user, request) => {
             email: patient.email,
             phone: patient.phone,
             address: patient.address,
-            polyclinic: patient.polyclinic,
+            polyc: patient.polyclinic,
             username: user.username
         },
         select: {

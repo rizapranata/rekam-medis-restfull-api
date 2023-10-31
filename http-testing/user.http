@@ -34,7 +34,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
-    "username": "samsul",
+    "username": "agus",
     "password": "rahasia"
 }
 
@@ -55,18 +55,18 @@ Accept: application/json
 POST http://localhost:3000/api/users/create
 Content-Type: application/json
 Accept: application/json
-Authorization: 3f208e07-95a8-4fe6-9856-111979f32fe0
+Authorization: 320a74c3-4963-4632-a09d-eaae6ba97168
 
 {
-    "username": "karina",
+    "username": "agus",
     "password": "rahasia",
-    "name": "Karina Mawardah",
-    "email": "karina@gmail.com",
-    "phone": "0897767787",
-    "specialist": "Jantung",
-    "poliName": "Poli Jantung",
+    "name": "Agus Salim",
+    "email": "agus@gmail.com",
+    "phone": "0874775893",
+    "specialist": "-",
+    "poliName": "-",
     "status": true,
-    "role": "doctor"
+    "role": "admin"
 }
 
 ### Get current user -----------------
@@ -74,7 +74,7 @@ Authorization: 3f208e07-95a8-4fe6-9856-111979f32fe0
 GET http://localhost:3000/api/users/current
 Content-Type: application/json
 Accept: application/json
-Authorization: 8bbf2641-c5a3-4f3d-a737-aa661430a671
+Authorization: 320a74c3-4963-4632-a09d-eaae6ba97168
 
 ### Patch user -----------------
 
@@ -108,10 +108,10 @@ Authorization: b0ba2620-a439-45f3-87e3-816a40b4566d
 
 ### get all user ---------------
 
-GET http://localhost:3000/api/users?role=admin
+GET http://localhost:3000/api/users
 Content-Type: application/json
 Accept: application/json
-Authorization: 3f208e07-95a8-4fe6-9856-111979f32fe0
+Authorization: 7d5793e7-5c70-4c63-bdd6-77ed7662adeb
 
 ### logout -----------------
 

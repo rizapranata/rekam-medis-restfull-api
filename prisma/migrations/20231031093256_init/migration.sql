@@ -34,10 +34,9 @@ CREATE TABLE `patients` (
     `email` VARCHAR(200) NULL,
     `phone` VARCHAR(20) NULL,
     `address` VARCHAR(225) NULL,
+    `polyclinic` VARCHAR(20) NOT NULL,
     `username` VARCHAR(100) NOT NULL,
-    `polyClinicId` INTEGER NULL,
 
-    UNIQUE INDEX `patients_polyClinicId_key`(`polyClinicId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE InnoDB;
 
@@ -87,25 +86,11 @@ CREATE TABLE `transactions` (
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE InnoDB;
 
--- CreateTable
-CREATE TABLE `medicalTransaction` (
-    `medicalRecordId` INTEGER NOT NULL,
-    `transactionId` INTEGER NOT NULL,
-    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `updatedAt` DATETIME(3) NOT NULL,
-
-    UNIQUE INDEX `medicalTransaction_medicalRecordId_key`(`medicalRecordId`),
-    UNIQUE INDEX `medicalTransaction_transactionId_key`(`transactionId`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE InnoDB;
-
 -- AddForeignKey
 ALTER TABLE `polyclinics` ADD CONSTRAINT `polyclinics_username_fkey` FOREIGN KEY (`username`) REFERENCES `users`(`username`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `patients` ADD CONSTRAINT `patients_username_fkey` FOREIGN KEY (`username`) REFERENCES `users`(`username`) ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `patients` ADD CONSTRAINT `patients_polyClinicId_fkey` FOREIGN KEY (`polyClinicId`) REFERENCES `polyclinics`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `medical_records` ADD CONSTRAINT `medical_records_username_fkey` FOREIGN KEY (`username`) REFERENCES `users`(`username`) ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -124,9 +109,3 @@ ALTER TABLE `transactions` ADD CONSTRAINT `transactions_medical_record_id_fkey` 
 
 -- AddForeignKey
 ALTER TABLE `transactions` ADD CONSTRAINT `transactions_username_fkey` FOREIGN KEY (`username`) REFERENCES `users`(`username`) ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `medicalTransaction` ADD CONSTRAINT `medicalTransaction_medicalRecordId_fkey` FOREIGN KEY (`medicalRecordId`) REFERENCES `medical_records`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `medicalTransaction` ADD CONSTRAINT `medicalTransaction_transactionId_fkey` FOREIGN KEY (`transactionId`) REFERENCES `transactions`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;

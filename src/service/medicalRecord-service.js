@@ -15,7 +15,7 @@ const create = async (user, request, patientId) => {
     })
 
     if (totalDataPatient < 1) {
-        throw new ResponseError(404, "Patient record is not found");
+        throw new ResponseError(404, "Patient is not found");
     }
 
     const patient = await prismaClient.patient.findUnique({
