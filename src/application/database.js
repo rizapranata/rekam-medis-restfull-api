@@ -23,6 +23,7 @@ export const prismaClient = new PrismaClient({
 });
 
 prismaClient.$on('error', (e) => {
+  console.log("missing data:", e.message);
     logger.error(e);
 })
 

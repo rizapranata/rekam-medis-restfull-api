@@ -28,7 +28,7 @@ const create = async (user, request) => {
             email: true,
             phone: true,
             address: true,
-            polyclinic: true,
+            poly: true,
             username: true
         }
     })

@@ -5,7 +5,7 @@
 POST http://localhost:3000/api/drugs/create
 Content-Type: application/json
 Accept: application/json
-Authorization: 0f6f8c43-6754-4dd3-84f7-1cd2ee3d2c49
+Authorization: c8d222ee-52c4-477e-80da-e7e81cfd10ae
 
 {
     "name": "Cataplam",
@@ -18,14 +18,14 @@ Authorization: 0f6f8c43-6754-4dd3-84f7-1cd2ee3d2c49
 GET http://localhost:3000/api/drugs/4
 Content-Type: application/json
 Accept: application/json
-Authorization: 0f6f8c43-6754-4dd3-84f7-1cd2ee3d2c49
+Authorization: c8d222ee-52c4-477e-80da-e7e81cfd10ae
 
 ### update drug -----------------
 
 PUT http://localhost:3000/api/drugs/1
 Content-Type: application/json
 Accept: application/json
-Authorization: 0f6f8c43-6754-4dd3-84f7-1cd2ee3d2c49
+Authorization: c8d222ee-52c4-477e-80da-e7e81cfd10ae
 
 {
     "name": "Actifed",
@@ -38,11 +38,11 @@ Authorization: 0f6f8c43-6754-4dd3-84f7-1cd2ee3d2c49
 GET http://localhost:3000/api/drugs
 Content-Type: application/json
 Accept: application/json
-Authorization: 0f6f8c43-6754-4dd3-84f7-1cd2ee3d2c49
+Authorization: c8d222ee-52c4-477e-80da-e7e81cfd10ae
 
 ### delete drug -----------------
 
 DELETE http://localhost:3000/api/drugs/2
 Content-Type: application/json
 Accept: application/json
-Authorization: 0f6f8c43-6754-4dd3-84f7-1cd2ee3d2c49
+Authorization: c8d222ee-52c4-477e-80da-e7e81cfd10ae

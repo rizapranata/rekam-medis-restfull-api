@@ -55,7 +55,7 @@ Accept: application/json
 POST http://localhost:3000/api/users/create
 Content-Type: application/json
 Accept: application/json
-Authorization: 3f208e07-95a8-4fe6-9856-111979f32fe0
+Authorization: c8d222ee-52c4-477e-80da-e7e81cfd10ae
 
 {
     "username": "karina",
@@ -108,10 +108,10 @@ Authorization: b0ba2620-a439-45f3-87e3-816a40b4566d
 
 ### get all user ---------------
 
-GET http://localhost:3000/api/users?role=admin
+GET http://localhost:3000/api/users
 Content-Type: application/json
 Accept: application/json
-Authorization: 3f208e07-95a8-4fe6-9856-111979f32fe0
+Authorization: c8d222ee-52c4-477e-80da-e7e81cfd10ae
 
 ### logout -----------------
 

@@ -6,7 +6,7 @@
 POST http://localhost:3000/api/polyclinics/create
 Content-Type: application/json
 Accept: application/json
-Authorization: 2c79c69b-354f-41ea-ad86-2b6a5a4defbd
+Authorization: c8d222ee-52c4-477e-80da-e7e81cfd10ae
 
 {
     "name": "Poli Gigi",
@@ -18,14 +18,14 @@ Authorization: 2c79c69b-354f-41ea-ad86-2b6a5a4defbd
 GET http://localhost:3000/api/polyclinics/2
 Content-Type: application/json
 Accept: application/json
-Authorization: 2c79c69b-354f-41ea-ad86-2b6a5a4defbd
+Authorization: c8d222ee-52c4-477e-80da-e7e81cfd10ae
 
 ### update poly -----------------
 
 PUT http://localhost:3000/api/polyclinics/4
 Content-Type: application/json
 Accept: application/json
-Authorization: 2c79c69b-354f-41ea-ad86-2b6a5a4defbd
+Authorization: c8d222ee-52c4-477e-80da-e7e81cfd10ae
 
 {
     "name": "Poli Mata",
@@ -37,14 +37,14 @@ Authorization: 2c79c69b-354f-41ea-ad86-2b6a5a4defbd
 GET http://localhost:3000/api/polyclinics
 Content-Type: application/json
 Accept: application/json
-Authorization: 2c79c69b-354f-41ea-ad86-2b6a5a4defbd
+Authorization: c8d222ee-52c4-477e-80da-e7e81cfd10ae
 
 ### delete poly -----------------
 
 DELETE http://localhost:3000/api/polyclinics/4
 Content-Type: application/json
 Accept: application/json
-Authorization: 2c79c69b-354f-41ea-ad86-2b6a5a4defbd
+Authorization: c8d222ee-52c4-477e-80da-e7e81cfd10ae
 
 
 ## =========================================== - Drug API - =========================================
