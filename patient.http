@@ -5,17 +5,17 @@
 POST http://localhost:3000/api/patients/create
 Content-Type: application/json
 Accept: application/json
-Authorization: c8d222ee-52c4-477e-80da-e7e81cfd10ae
+Authorization: 39bdda13-42fb-4151-9911-ff035eb09739
 
 {
-    "name": "Rosalina",
-    "gender": "Perempuan",
+    "name": "Anjar Rizki",
+    "gender": "Laki -laki",
     "age": 23,
-    "nik": "587687887788",
-    "email": "rosalina@gmail.com",
-    "phone": "087554655667",
+    "nik": "986837878483",
+    "email": "anjar@gmail.com",
+    "phone": "085756738873",
     "address": "JL. Dadap No.30, Kec. Bekasi",
-    "poly": "Poli Gigi"
+    "poly": "Poli Umum"
 }
 
 ### view detail patient --------------
@@ -23,14 +23,14 @@ Authorization: c8d222ee-52c4-477e-80da-e7e81cfd10ae
 GET http://localhost:3000/api/patients/3
 Content-Type: application/json
 Accept: application/json
-Authorization: c8d222ee-52c4-477e-80da-e7e81cfd10ae
+Authorization: 39bdda13-42fb-4151-9911-ff035eb09739
 
 ### update patient -----------------
 
 PUT http://localhost:3000/api/patients/3
 Content-Type: application/json
 Accept: application/json
-Authorization: c8d222ee-52c4-477e-80da-e7e81cfd10ae
+Authorization: 39bdda13-42fb-4151-9911-ff035eb09739
 
 {
     "name": "Mega Wati",
@@ -46,12 +46,12 @@ Authorization: c8d222ee-52c4-477e-80da-e7e81cfd10ae
 GET http://localhost:3000/api/patients
 Content-Type: application/json
 Accept: application/json
-Authorization: c8d222ee-52c4-477e-80da-e7e81cfd10ae
+Authorization: 39bdda13-42fb-4151-9911-ff035eb09739
 
 ### remove patient --------------
 
-DELETE http://localhost:3000/api/patients/1
+DELETE http://localhost:3000/api/patients/25
 Content-Type: application/json
 Accept: application/json
-Authorization: c8d222ee-52c4-477e-80da-e7e81cfd10ae
+Authorization: 39bdda13-42fb-4151-9911-ff035eb09739
 

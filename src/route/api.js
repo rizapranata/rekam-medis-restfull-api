@@ -1,4 +1,5 @@
 import express from "express"
+import cors from "cors"
 import { authMiddleware } from "../middleware/auth-middleware.js"
 import userController from "../controller/user-controller.js";
 import patientController from "../controller/patient-controller.js";

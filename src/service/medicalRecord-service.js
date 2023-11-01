@@ -29,26 +29,13 @@ const create = async (user, request, patientId) => {
         drugList.push(item)
     });
 
-    // medicalRecord.patientId = patient.id;
-    const drugs = medicalRecord.drugItems = {
+    medicalRecord.patientId = patient.id;
+    medicalRecord.drugItems = {
         create: drugList
     }
 
-    console.log("MR data:", medicalRecord);
-    console.log("drug data:", drugs);
     return prismaClient.medicalRecord.create({
-        data: {
-            problem: medicalRecord.problem,
-            diagnosis: medicalRecord.diagnosis,
-            note: medicalRecord.note,
-            drugItems: drugs,
-            username: user.username,
-            patient: {
-                connect: {
-                    id: patientId
-                }
-            },
-        },
+        data: medicalRecord,
         select: {
             id: true,
             patientId: true,

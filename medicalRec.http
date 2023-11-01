@@ -14,16 +14,17 @@ Accept: application/json
 
 ### create Medical Record -----------------
 
-POST http://localhost:3000/api/medical-records/3
+POST http://localhost:3000/api/medical-records/1
 Content-Type: application/json
 Accept: application/json
-Authorization: e8f2d6d4-512c-4175-bd00-aa956c014f40
+Authorization: 870f305a-0c3c-4de9-b946-b63fac2a7460
 
 {
-    "problem": "Darah rendah",
-    "diagnosis": "Jantung lemah memompa darah",
-    "note": "Ini adalah catatan penyakit jantung",
+    "problem": "Panas tinggi",
+    "diagnosis": "Gejala Tipes",
+    "note": "Ini adalah catatan gejala tipes",
     "drugItems": [
+        {"drugSelectedId": 4},
         {"drugSelectedId": 1}
     ]
 }
@@ -33,21 +34,21 @@ Authorization: e8f2d6d4-512c-4175-bd00-aa956c014f40
 GET http://localhost:3000/api/medical-records
 Content-Type: application/json
 Accept: application/json
-Authorization: e8f2d6d4-512c-4175-bd00-aa956c014f40
+Authorization: 870f305a-0c3c-4de9-b946-b63fac2a7460
 
 ### Get detail Medical Record -----------------
 
-GET http://localhost:3000/api/medical-records/16
+GET http://localhost:3000/api/medical-records/25
 Content-Type: application/json
 Accept: application/json
-Authorization: e8f2d6d4-512c-4175-bd00-aa956c014f40
+Authorization: 870f305a-0c3c-4de9-b946-b63fac2a7460
 
 ### update Medical Record -----------------
 
-PUT http://localhost:3000/api/medical-records/16
+PUT http://localhost:3000/api/medical-records/13
 Content-Type: application/json
 Accept: application/json
-Authorization: e8f2d6d4-512c-4175-bd00-aa956c014f40
+Authorization: 870f305a-0c3c-4de9-b946-b63fac2a7460
 
 {
     "problem": "Sesak nafas",
@@ -64,7 +65,7 @@ Authorization: e8f2d6d4-512c-4175-bd00-aa956c014f40
 DELETE http://localhost:3000/api/medical-records/6
 Content-Type: application/json
 Accept: application/json
-Authorization: e8f2d6d4-512c-4175-bd00-aa956c014f40
+Authorization: 870f305a-0c3c-4de9-b946-b63fac2a7460
 
 ### logout -----------------
 
