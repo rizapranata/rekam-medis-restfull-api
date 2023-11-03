@@ -96,7 +96,13 @@ const login = async (request) => {
             username: user.username
         },
         select: {
-            token: true
+            token: true,
+            username: true,
+            name: true,
+            email: true,
+            phone: true,
+            role: true,
+            password: true
         }
     })
 }
