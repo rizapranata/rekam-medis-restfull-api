@@ -17,14 +17,14 @@ Accept: application/json
 POST http://localhost:3000/api/medical-records/1
 Content-Type: application/json
 Accept: application/json
-Authorization: 870f305a-0c3c-4de9-b946-b63fac2a7460
+Authorization: aaf987cd-d201-4771-b541-689bd82aabd2
 
 {
-    "problem": "Panas tinggi",
-    "diagnosis": "Gejala Tipes",
-    "note": "Ini adalah catatan gejala tipes",
+    "problem": "Muntah dan mencret",
+    "diagnosis": "Gejala diare",
+    "note": "Ini adalah catatan gejala diare",
     "drugItems": [
-        {"drugSelectedId": 4},
+        {"drugSelectedId": 2},
         {"drugSelectedId": 1}
     ]
 }
@@ -34,21 +34,21 @@ Authorization: 870f305a-0c3c-4de9-b946-b63fac2a7460
 GET http://localhost:3000/api/medical-records
 Content-Type: application/json
 Accept: application/json
-Authorization: 870f305a-0c3c-4de9-b946-b63fac2a7460
+Authorization: aaf987cd-d201-4771-b541-689bd82aabd2
 
 ### Get detail Medical Record -----------------
 
-GET http://localhost:3000/api/medical-records/25
+GET http://localhost:3000/api/medical-records/23
 Content-Type: application/json
 Accept: application/json
-Authorization: 870f305a-0c3c-4de9-b946-b63fac2a7460
+Authorization: aaf987cd-d201-4771-b541-689bd82aabd2
 
 ### update Medical Record -----------------
 
 PUT http://localhost:3000/api/medical-records/13
 Content-Type: application/json
 Accept: application/json
-Authorization: 870f305a-0c3c-4de9-b946-b63fac2a7460
+Authorization: aaf987cd-d201-4771-b541-689bd82aabd2
 
 {
     "problem": "Sesak nafas",
@@ -65,7 +65,7 @@ Authorization: 870f305a-0c3c-4de9-b946-b63fac2a7460
 DELETE http://localhost:3000/api/medical-records/6
 Content-Type: application/json
 Accept: application/json
-Authorization: 870f305a-0c3c-4de9-b946-b63fac2a7460
+Authorization: aaf987cd-d201-4771-b541-689bd82aabd2
 
 ### logout -----------------
 

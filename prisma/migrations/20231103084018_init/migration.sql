@@ -12,7 +12,7 @@ CREATE TABLE `users` (
     `role` VARCHAR(20) NOT NULL,
 
     PRIMARY KEY (`username`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE InnoDB;
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
 CREATE TABLE `polyclinics` (
@@ -22,7 +22,7 @@ CREATE TABLE `polyclinics` (
     `username` VARCHAR(100) NOT NULL,
 
     PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE InnoDB;
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
 CREATE TABLE `patients` (
@@ -30,26 +30,29 @@ CREATE TABLE `patients` (
     `name` VARCHAR(100) NOT NULL,
     `gender` VARCHAR(20) NOT NULL,
     `age` INTEGER NOT NULL,
+    `nik` VARCHAR(100) NOT NULL,
     `email` VARCHAR(200) NULL,
     `phone` VARCHAR(20) NULL,
     `address` VARCHAR(225) NULL,
+    `poly` VARCHAR(20) NOT NULL,
     `username` VARCHAR(100) NOT NULL,
 
     PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE InnoDB;
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
 CREATE TABLE `medical_records` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `patient` VARCHAR(100) NOT NULL,
     `problem` VARCHAR(100) NOT NULL,
     `diagnosis` VARCHAR(200) NOT NULL,
     `note` VARCHAR(255) NOT NULL,
-    `date` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL,
     `username` VARCHAR(100) NOT NULL,
+    `patientId` INTEGER NOT NULL,
 
     PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE InnoDB;
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
 CREATE TABLE `drugs` (
@@ -58,30 +61,40 @@ CREATE TABLE `drugs` (
     `price` INTEGER NOT NULL,
     `description` VARCHAR(225) NULL,
     `username` VARCHAR(100) NOT NULL,
-    `medical_record_id` INTEGER NOT NULL,
 
     PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE InnoDB;
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `drugItems` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `drugSelectedId` INTEGER NULL,
+    `medical_record_id` INTEGER NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
 CREATE TABLE `transactions` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `total_price` INTEGER NOT NULL,
-    `medical_record_id` INTEGER NOT NULL,
+    `medical_record_id` INTEGER NULL,
     `username` VARCHAR(100) NOT NULL,
 
     UNIQUE INDEX `transactions_medical_record_id_key`(`medical_record_id`),
     PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE InnoDB;
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `MedicalTransaction` (
+CREATE TABLE `medicalTransaction` (
     `medicalRecordId` INTEGER NOT NULL,
     `transactionId` INTEGER NOT NULL,
-    `printedAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL,
 
-    PRIMARY KEY (`medicalRecordId`, `transactionId`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE InnoDB;
+    UNIQUE INDEX `medicalTransaction_medicalRecordId_key`(`medicalRecordId`),
+    UNIQUE INDEX `medicalTransaction_transactionId_key`(`transactionId`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- AddForeignKey
 ALTER TABLE `polyclinics` ADD CONSTRAINT `polyclinics_username_fkey` FOREIGN KEY (`username`) REFERENCES `users`(`username`) ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -93,19 +106,22 @@ ALTER TABLE `patients` ADD CONSTRAINT `patients_username_fkey` FOREIGN KEY (`use
 ALTER TABLE `medical_records` ADD CONSTRAINT `medical_records_username_fkey` FOREIGN KEY (`username`) REFERENCES `users`(`username`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE `medical_records` ADD CONSTRAINT `medical_records_patientId_fkey` FOREIGN KEY (`patientId`) REFERENCES `patients`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE `drugs` ADD CONSTRAINT `drugs_username_fkey` FOREIGN KEY (`username`) REFERENCES `users`(`username`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `drugs` ADD CONSTRAINT `drugs_medical_record_id_fkey` FOREIGN KEY (`medical_record_id`) REFERENCES `medical_records`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `drugItems` ADD CONSTRAINT `drugItems_medical_record_id_fkey` FOREIGN KEY (`medical_record_id`) REFERENCES `medical_records`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `transactions` ADD CONSTRAINT `transactions_medical_record_id_fkey` FOREIGN KEY (`medical_record_id`) REFERENCES `medical_records`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `transactions` ADD CONSTRAINT `transactions_medical_record_id_fkey` FOREIGN KEY (`medical_record_id`) REFERENCES `medical_records`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `transactions` ADD CONSTRAINT `transactions_username_fkey` FOREIGN KEY (`username`) REFERENCES `users`(`username`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `MedicalTransaction` ADD CONSTRAINT `MedicalTransaction_medicalRecordId_fkey` FOREIGN KEY (`medicalRecordId`) REFERENCES `medical_records`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `medicalTransaction` ADD CONSTRAINT `medicalTransaction_medicalRecordId_fkey` FOREIGN KEY (`medicalRecordId`) REFERENCES `medical_records`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `MedicalTransaction` ADD CONSTRAINT `MedicalTransaction_transactionId_fkey` FOREIGN KEY (`transactionId`) REFERENCES `transactions`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `medicalTransaction` ADD CONSTRAINT `medicalTransaction_transactionId_fkey` FOREIGN KEY (`transactionId`) REFERENCES `transactions`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;

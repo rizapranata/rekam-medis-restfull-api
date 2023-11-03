@@ -5,12 +5,12 @@
 POST http://localhost:3000/api/drugs/create
 Content-Type: application/json
 Accept: application/json
-Authorization: c8d222ee-52c4-477e-80da-e7e81cfd10ae
+Authorization: aaf987cd-d201-4771-b541-689bd82aabd2
 
 {
-    "name": "Cataplam",
-    "price": 7500,
-    "description": "Obat pereda sakit gigi"
+    "name": "Bodrexin",
+    "price": 2500,
+    "description": "Obat penurun panas"
 }
 
 ### get drug -----------------
@@ -18,14 +18,14 @@ Authorization: c8d222ee-52c4-477e-80da-e7e81cfd10ae
 GET http://localhost:3000/api/drugs/4
 Content-Type: application/json
 Accept: application/json
-Authorization: c8d222ee-52c4-477e-80da-e7e81cfd10ae
+Authorization: aaf987cd-d201-4771-b541-689bd82aabd2
 
 ### update drug -----------------
 
 PUT http://localhost:3000/api/drugs/1
 Content-Type: application/json
 Accept: application/json
-Authorization: c8d222ee-52c4-477e-80da-e7e81cfd10ae
+Authorization: aaf987cd-d201-4771-b541-689bd82aabd2
 
 {
     "name": "Actifed",
@@ -38,11 +38,11 @@ Authorization: c8d222ee-52c4-477e-80da-e7e81cfd10ae
 GET http://localhost:3000/api/drugs
 Content-Type: application/json
 Accept: application/json
-Authorization: c8d222ee-52c4-477e-80da-e7e81cfd10ae
+Authorization: aaf987cd-d201-4771-b541-689bd82aabd2
 
 ### delete drug -----------------
 
 DELETE http://localhost:3000/api/drugs/2
 Content-Type: application/json
 Accept: application/json
-Authorization: c8d222ee-52c4-477e-80da-e7e81cfd10ae
+Authorization: aaf987cd-d201-4771-b541-689bd82aabd2
