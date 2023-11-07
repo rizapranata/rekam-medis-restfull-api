@@ -102,6 +102,9 @@ const login = async (request) => {
             email: true,
             phone: true,
             role: true,
+            status: true,
+            specialist: true,
+            poliName: true,
             password: true
         }
     })

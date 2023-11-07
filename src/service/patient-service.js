@@ -53,13 +53,14 @@ const update = async (user, request) => {
             id: patient.id
         },
         data: {
+            nik: patient.nik,
             name: patient.name,
             gender: patient.gender,
             age: patient.age,
             email: patient.email,
             phone: patient.phone,
             address: patient.address,
-            polyclinic: patient.polyclinic,
+            poly: patient.poly,
             username: user.username
         },
         select: {
@@ -71,6 +72,7 @@ const update = async (user, request) => {
             email: true,
             phone: true,
             address: true,
+            poly: true,
             username: true
         }
     })
@@ -92,6 +94,7 @@ const get = async (user, patientId) => {
             nik: true,
             email: true,
             phone: true,
+            poly: true,
             address: true
         }
     });

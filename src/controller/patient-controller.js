@@ -18,6 +18,13 @@ const create = async (req, res, next) => {
             data: result
         })
     } catch (e) {
+        if (e && e.name === "ValidationError") {
+            return res.json({
+              error: 1,
+              message: error.message,
+              fields: error.errors,
+            });
+          }
         next(e)
     }
 }
