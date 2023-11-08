@@ -9,12 +9,12 @@ const create = async (user, request) => {
 
     const countPatient = await prismaClient.patient.count({
         where: {
-            nik: patient.nik
+            noRm: patient.noRm
         }
     });
 
     if (countPatient === 1) {
-        throw new ResponseError(400, "NIK already exist");
+        throw new ResponseError(400, "No Rekam medis already exist");
     }
 
     return prismaClient.patient.create({
@@ -24,7 +24,8 @@ const create = async (user, request) => {
             name: true,
             gender: true,
             age: true,
-            nik: true,
+            noRm: true,
+            birth: true,
             email: true,
             phone: true,
             address: true,
@@ -53,10 +54,11 @@ const update = async (user, request) => {
             id: patient.id
         },
         data: {
-            nik: patient.nik,
+            noRm: patient.noRm,
             name: patient.name,
             gender: patient.gender,
             age: patient.age,
+            birth: patient.birth,
             email: patient.email,
             phone: patient.phone,
             address: patient.address,
@@ -68,7 +70,8 @@ const update = async (user, request) => {
             name: true,
             gender: true,
             age: true,
-            nik: true,
+            noRm: true,
+            birth: true,
             email: true,
             phone: true,
             address: true,
@@ -91,7 +94,8 @@ const get = async (user, patientId) => {
             name: true,
             gender: true,
             age: true,
-            nik: true,
+            noRm: true,
+            birth: true,
             email: true,
             phone: true,
             poly: true,

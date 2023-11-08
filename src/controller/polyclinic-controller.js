@@ -14,6 +14,8 @@ const create = async (req, res, next) => {
         const user = req.user;
         const request = req.body;
 
+        console.log("request body:", request);
+
         const result = await polyclinicService.create(user, request);
         res.status(200).json({
             data: result
