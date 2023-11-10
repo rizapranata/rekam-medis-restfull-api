@@ -17,6 +17,8 @@ const create = async (user, request) => {
         throw new ResponseError(400, "No Rekam medis already exist");
     }
 
+    console.log("create patient:", patient);
+
     return prismaClient.patient.create({
         data: patient,
         select: {
@@ -131,10 +133,10 @@ const search = async (user, request) => {
         })
     }
 
-    if (request.nik) {
+    if (request.noRm) {
         filters.push({
-            nik: {
-                contains: request.nik
+            noRm: {
+                contains: request.noRm
             }
         })
     }
@@ -161,7 +163,7 @@ const search = async (user, request) => {
         });
     }
 
-    console.log("isi Filters:", filters);
+    console.log("isi Filtersnya:", filters);
 
     const patient = await prismaClient.patient.findMany({
         where: {

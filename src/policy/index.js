@@ -36,7 +36,10 @@ const policies = {
         can("update", "MedicalRecord", {user_id: user.username});
         can("delete", "MedicalRecord", {user_id: user.username});
         can("read", "Polyclinic", {user_id: user.username});
+        can("read", "Patient", {user_id: user.username});
+        can("update", "Patient", {user_id: user.username});
         can("view", "Polyclinic");
+        can("view", "Patient");
     },
 
     superAdmin(user, {can}) {

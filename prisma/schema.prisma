@@ -45,7 +45,7 @@ model Patient {
   name          String          @db.VarChar(100)
   gender        String          @db.VarChar(20)
   age           Int
-  noRm          String          @db.VarChar(100)
+  noRm          String          @unique @db.VarChar(20)
   birth         DateTime        @db.Date()
   email         String?         @db.VarChar(200)
   phone         String?         @db.VarChar(20)
@@ -66,7 +66,7 @@ model MedicalRecord {
   createdAt    DateTime            @default(now())
   updatedAt    DateTime            @updatedAt
   transaction  Transaction?
-  drugItems    DrugItem[]
+  noRm         String              @db.VarChar(20)
   transactions MedicalTransaction?
   username     String              @db.VarChar(100)
   user         User                @relation(fields: [username], references: [username])
@@ -88,10 +88,10 @@ model Drug {
 }
 
 model DrugItem {
-  id                Int            @id @default(autoincrement())
-  drugSelectedId    Int?
-  medical_record_id Int?
-  medical_record    MedicalRecord? @relation(fields: [medical_record_id], references: [id])
+  id             Int  @id @default(autoincrement())
+  drugSelectedId Int?
+  // medical_record_id Int?
+  // medical_record    MedicalRecord? @relation(fields: [medical_record_id], references: [id])
 
   @@map("drugItems")
 }

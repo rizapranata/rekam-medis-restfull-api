@@ -3,36 +3,38 @@ import { ResponseError } from "../error/response-error.js";
 import { createMRValidation, getMRValidation, searchMRValidation, updateMRValidation } from "../validation/medicalRecord-validation.js"
 import { validate } from "../validation/validation.js"
 
-const create = async (user, request, patientId) => {
+const create = async (user, request) => {
     const medicalRecord = validate(createMRValidation, request);
     medicalRecord.username = user.username;
 
     //check data patient 
     const totalDataPatient = await prismaClient.patient.count({
         where: {
-            id: patientId
+            noRm: medicalRecord.noRm
         }
     })
 
-    if (totalDataPatient < 1) {
-        throw new ResponseError(404, "Patient record is not found");
+    if (totalDataPatient !== 1) {
+        throw new ResponseError(404, "Patient is not found!");
     }
 
     const patient = await prismaClient.patient.findUnique({
         where: {
-            id: patientId
+            noRm: medicalRecord.noRm
         },
     })
    
-    let drugList = [];
-     medicalRecord.drugItems.map((item) => {
-        drugList.push(item)
-    });
+    // let drugList = [];
+    //  medicalRecord.drugItems.map((item) => {
+    //     drugList.push(item)
+    // });
 
     medicalRecord.patientId = patient.id;
-    medicalRecord.drugItems = {
-        create: drugList
-    }
+    // medicalRecord.drugItems = {
+    //     create: drugList
+    // }
+
+    console.log("Result final:", medicalRecord);
 
     return prismaClient.medicalRecord.create({
         data: medicalRecord,
@@ -43,7 +45,7 @@ const create = async (user, request, patientId) => {
             diagnosis: true,
             note: true,
             patient: true,
-            drugItems: true,    
+            noRm: true,
             createdAt: true,
             updatedAt: true,
             username: true
@@ -128,10 +130,10 @@ const search = async (user, request) => {
         })
     }
 
-    if (request.nik) {
+    if (request.noRm) {
         filters.push({
-            nik: {
-                contains: request.nik
+            noRm: {
+                contains: request.noRm
             }
         })
     }
@@ -147,7 +149,6 @@ const search = async (user, request) => {
         skip: skip,
         include: {
             patient: true,
-            drugItems: true,
         }
     });
 

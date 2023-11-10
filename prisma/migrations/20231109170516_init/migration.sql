@@ -30,13 +30,17 @@ CREATE TABLE `patients` (
     `name` VARCHAR(100) NOT NULL,
     `gender` VARCHAR(20) NOT NULL,
     `age` INTEGER NOT NULL,
-    `nik` VARCHAR(100) NOT NULL,
+    `noRm` VARCHAR(20) NOT NULL,
+    `nik` VARCHAR(30) NOT NULL,
+    `birth` DATE NOT NULL,
     `email` VARCHAR(200) NULL,
     `phone` VARCHAR(20) NULL,
     `address` VARCHAR(225) NULL,
     `poly` VARCHAR(20) NOT NULL,
     `username` VARCHAR(100) NOT NULL,
 
+    UNIQUE INDEX `patients_noRm_key`(`noRm`),
+    UNIQUE INDEX `patients_nik_key`(`nik`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -48,9 +52,11 @@ CREATE TABLE `medical_records` (
     `note` VARCHAR(255) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
+    `noRm` VARCHAR(20) NOT NULL,
     `username` VARCHAR(100) NOT NULL,
     `patientId` INTEGER NOT NULL,
 
+    UNIQUE INDEX `medical_records_noRm_key`(`noRm`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -69,7 +75,6 @@ CREATE TABLE `drugs` (
 CREATE TABLE `drugItems` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `drugSelectedId` INTEGER NULL,
-    `medical_record_id` INTEGER NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -110,9 +115,6 @@ ALTER TABLE `medical_records` ADD CONSTRAINT `medical_records_patientId_fkey` FO
 
 -- AddForeignKey
 ALTER TABLE `drugs` ADD CONSTRAINT `drugs_username_fkey` FOREIGN KEY (`username`) REFERENCES `users`(`username`) ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `drugItems` ADD CONSTRAINT `drugItems_medical_record_id_fkey` FOREIGN KEY (`medical_record_id`) REFERENCES `medical_records`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `transactions` ADD CONSTRAINT `transactions_medical_record_id_fkey` FOREIGN KEY (`medical_record_id`) REFERENCES `medical_records`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;

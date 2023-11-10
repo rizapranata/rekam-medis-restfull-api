@@ -1,11 +1,10 @@
 import Joi from "joi";
-import JoiDate from "@joi/date";
 
 const createPatientValidation = Joi.object({
     name: Joi.string().max(100).required(),
     gender: Joi.string().max(20).required(),
     age: Joi.number().positive().required(),
-    noRm: Joi.string().max(30).optional(),
+    noRm: Joi.string().max(30).required(),
     birth: Joi.date().required(),
     email: Joi.string().max(200).email().optional(),
     phone: Joi.string().max(20).optional(),
@@ -35,7 +34,7 @@ const searchPatientValidation = Joi.object({
     name: Joi.string().optional(),
     gender: Joi.string().optional(),
     age: Joi.number().positive().optional(),
-    nik: Joi.string().max(30).optional(),
+    noRm: Joi.string().max(30).optional(),
     email: Joi.string().max(200).email().optional(),
     phone: Joi.string().max(20).optional(),
 });

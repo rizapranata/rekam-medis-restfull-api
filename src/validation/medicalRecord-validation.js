@@ -7,10 +7,10 @@ const drugIdObj = Joi.object({
   });
 
 const createMRValidation = Joi.object({
+    noRm: Joi.string().max(20).required(),
     problem: Joi.string().max(100).required(),
     diagnosis: Joi.string().max(200).required(),
     note: Joi.string().max(255).optional(),
-    drugItems: Joi.array().items(drugIdObj)
 });
 
 const updateMRValidation = Joi.object({
