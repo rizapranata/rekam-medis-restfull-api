@@ -17,13 +17,13 @@ Accept: application/json
 POST http://localhost:3000/api/medical-records
 Content-Type: application/json
 Accept: application/json
-Authorization: d4554488-1ed5-466e-a252-2d1757879cf1
+Authorization: a339455e-354e-4dc6-8eaf-5cb7e9b69d24
 
 {
-    "noRm": "747",
+    "noRm": "084757 ",
     "problem": "Sering BAB",
     "diagnosis": "Gejala diare",
-    "note": "Ini adalah catatan gejala diare",
+    "note": "Ini adalah catatan gejala diare"
 }
 
 ### Get all Medical Record -----------------
@@ -35,17 +35,17 @@ Authorization: c6d6919d-7670-4697-af7d-7b8d37fa9519
 
 ### Get detail Medical Record -----------------
 
-GET http://localhost:3000/api/medical-records/23
+GET http://localhost:3000/api/medical-records/4
 Content-Type: application/json
 Accept: application/json
-Authorization: d09bc46b-119b-4d19-9bd2-426e4235f085
+Authorization: 4b0512fd-da70-401d-acc1-ced5a9a639d6 
 
 ### update Medical Record -----------------
 
 PUT http://localhost:3000/api/medical-records/8
 Content-Type: application/json
 Accept: application/json
-Authorization: d09bc46b-119b-4d19-9bd2-426e4235f085
+Authorization: 4b0512fd-da70-401d-acc1-ced5a9a639d6 
 
 {
     "problem": "Sesak nafas",

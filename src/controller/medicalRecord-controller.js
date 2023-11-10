@@ -69,6 +69,12 @@ const get = async (req, res, next) => {
             data: result
         })
     } catch (e) {
+        res.json({
+            error: 1,
+            message: err.message,
+            fields: err.errors,
+        });
+
         next(e)
     }
 }
