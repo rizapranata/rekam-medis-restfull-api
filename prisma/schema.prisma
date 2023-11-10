@@ -62,7 +62,7 @@ model MedicalRecord {
   id           Int                 @id @default(autoincrement())
   problem      String              @db.VarChar(100)
   diagnosis    String              @db.VarChar(200)
-  note         String              @db.VarChar(255)
+  note         String?             @db.VarChar(255)
   createdAt    DateTime            @default(now())
   updatedAt    DateTime            @updatedAt
   transaction  Transaction?

@@ -15,10 +15,11 @@ const createMRValidation = Joi.object({
 
 const updateMRValidation = Joi.object({
     id: Joi.number().positive().required(),
+    noRm: Joi.string().max(20).required(),
     problem: Joi.string().max(100).required(),
     diagnosis: Joi.string().max(200).required(),
     note: Joi.string().max(255).optional(),
-    drugItems: Joi.array().items(drugIdObj)
+    username: Joi.string().max(100).optional()
 });
 
 const searchMRValidation = Joi.object({

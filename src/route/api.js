@@ -12,7 +12,7 @@ userRouter.use(authMiddleware)
 
 // User API
 userRouter.get('/api/users/current', userController.get);
-userRouter.patch('/api/users/current', userController.update);
+userRouter.patch('/api/users', userController.update);
 userRouter.post('/api/users/logout', userController.logout);
 userRouter.post('/api/users/create', userController.create);
 userRouter.delete('/api/users/delete', userController.remove);

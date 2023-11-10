@@ -72,6 +72,7 @@ const update = async (user, request) => {
         },
         data: {
             id: medicalRecord.id,
+            noRm: medicalRecord.noRm,
             problem: medicalRecord.problem,
             diagnosis: medicalRecord.diagnosis,
             note: medicalRecord.note,
