@@ -126,6 +126,10 @@ const remove = async (req, res, next) => {
             data: `medical record with id ${medicalRecordId} is already deleted!`
         })
     } catch (e) {
+        res.status(500).json({
+            error: 1,
+            message: e.message
+        })
         next(e)
     }
 }

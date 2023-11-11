@@ -105,7 +105,8 @@ const get = async (user, medicalRecordId) => {
             diagnosis: true,
             note: true,
             patient: true,
-            noRm: true
+            noRm: true,
+            createdAt: true
         }
     })
 }

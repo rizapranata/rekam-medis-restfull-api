@@ -120,11 +120,16 @@ const remove = async (req, res, next) => {
   try {
     const user = req.user;
     const patientId = req.params.patientId;
-    await patientService.remove(user, patientId);
+    const result = await patientService.remove(user, patientId);
     res.status(200).json({
-      data: `patient id ${patientId} is already deleted!`,
+      message: `patient id ${patientId} is already deleted!`,
+      data: result
     });
   } catch (e) {
+    res.json({
+      error: 1,
+      message: e.message,
+    });
     next(e);
   }
 };
