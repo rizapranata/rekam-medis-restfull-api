@@ -163,7 +163,7 @@ const search = async (user, request) => {
         });
     }
 
-    console.log("isi Filtersnya:", filters);
+    console.log("filters:", filters);
 
     const patient = await prismaClient.patient.findMany({
         where: {

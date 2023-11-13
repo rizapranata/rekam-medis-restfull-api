@@ -41,19 +41,20 @@ model Polyclinic {
 }
 
 model Patient {
-  id            Int             @id @default(autoincrement())
-  name          String          @db.VarChar(100)
-  gender        String          @db.VarChar(20)
-  age           Int
-  noRm          String          @unique @db.VarChar(20)
-  birth         DateTime        @db.Date()
-  email         String?         @db.VarChar(200)
-  phone         String?         @db.VarChar(20)
-  address       String?         @db.VarChar(225)
-  poly          String          @db.VarChar(20)
-  username      String          @db.VarChar(100)
-  user          User            @relation(fields: [username], references: [username])
-  medicalRecord MedicalRecord[]
+  id                 Int                  @id @default(autoincrement())
+  name               String               @db.VarChar(100)
+  gender             String               @db.VarChar(20)
+  age                Int
+  noRm               String               @unique @db.VarChar(20)
+  birth              DateTime             @db.Date()
+  email              String?              @db.VarChar(200)
+  phone              String?              @db.VarChar(20)
+  address            String?              @db.VarChar(225)
+  poly               String               @db.VarChar(20)
+  username           String               @db.VarChar(100)
+  user               User                 @relation(fields: [username], references: [username])
+  medicalRecord      MedicalRecord[]
+  printMedicalRecord PrintMedicalRecord[]
 
   @@map("patients")
 }
@@ -74,6 +75,25 @@ model MedicalRecord {
   patient      Patient             @relation(fields: [patientId], references: [id])
 
   @@map("medical_records")
+}
+
+model PrintMedicalRecord {
+  id               Int      @id @default(autoincrement())
+  problem          String   @db.VarChar(100)
+  diagnosis        String   @db.VarChar(200)
+  note             String?  @db.VarChar(255)
+  createdAt        DateTime @default(now())
+  noRm             String   @db.VarChar(20)
+  doctorName       String   @db.VarChar(100)
+  doctorEmail      String?  @db.VarChar(200)
+  doctorPhone      String?  @db.VarChar(20)
+  doctorStatus     Boolean? @db.TinyInt
+  doctorSpecialist String   @db.VarChar(100)
+  doctorPolyName   String?  @db.VarChar(100)
+  patientId        Int
+  patient          Patient  @relation(fields: [patientId], references: [id])
+
+  @@map("printMedicalRecords")
 }
 
 model Drug {

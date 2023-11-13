@@ -6,6 +6,7 @@ const validate = (schema, request) => {
         allowUnknown: false //auto reject jika ada field yg tidak diketahui
     });
     if (result.error) {
+        console.log("error validate:", result.error);
         throw new ResponseError(400, result.error.message);
     }else{
         return result.value;

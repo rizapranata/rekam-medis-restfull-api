@@ -31,7 +31,6 @@ CREATE TABLE `patients` (
     `gender` VARCHAR(20) NOT NULL,
     `age` INTEGER NOT NULL,
     `noRm` VARCHAR(20) NOT NULL,
-    `nik` VARCHAR(30) NOT NULL,
     `birth` DATE NOT NULL,
     `email` VARCHAR(200) NULL,
     `phone` VARCHAR(20) NULL,
@@ -40,7 +39,6 @@ CREATE TABLE `patients` (
     `username` VARCHAR(100) NOT NULL,
 
     UNIQUE INDEX `patients_noRm_key`(`noRm`),
-    UNIQUE INDEX `patients_nik_key`(`nik`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -49,14 +47,33 @@ CREATE TABLE `medical_records` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `problem` VARCHAR(100) NOT NULL,
     `diagnosis` VARCHAR(200) NOT NULL,
-    `note` VARCHAR(255) NOT NULL,
+    `note` VARCHAR(255) NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
     `noRm` VARCHAR(20) NOT NULL,
     `username` VARCHAR(100) NOT NULL,
     `patientId` INTEGER NOT NULL,
 
-    UNIQUE INDEX `medical_records_noRm_key`(`noRm`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `printMedicalRecords` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `problem` VARCHAR(100) NOT NULL,
+    `diagnosis` VARCHAR(200) NOT NULL,
+    `note` VARCHAR(255) NULL,
+    `createdAt` VARCHAR(30) NULL,
+    `updatedAt` VARCHAR(30) NULL,
+    `noRm` VARCHAR(20) NOT NULL,
+    `doctorName` VARCHAR(100) NOT NULL,
+    `doctorEmail` VARCHAR(200) NULL,
+    `doctorPhone` VARCHAR(20) NULL,
+    `doctorStatus` BOOLEAN NULL,
+    `doctorSpecialist` VARCHAR(100) NOT NULL,
+    `doctorPolyName` VARCHAR(100) NULL,
+    `patientId` INTEGER NOT NULL,
+
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -112,6 +129,9 @@ ALTER TABLE `medical_records` ADD CONSTRAINT `medical_records_username_fkey` FOR
 
 -- AddForeignKey
 ALTER TABLE `medical_records` ADD CONSTRAINT `medical_records_patientId_fkey` FOREIGN KEY (`patientId`) REFERENCES `patients`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `printMedicalRecords` ADD CONSTRAINT `printMedicalRecords_patientId_fkey` FOREIGN KEY (`patientId`) REFERENCES `patients`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `drugs` ADD CONSTRAINT `drugs_username_fkey` FOREIGN KEY (`username`) REFERENCES `users`(`username`) ON DELETE RESTRICT ON UPDATE CASCADE;

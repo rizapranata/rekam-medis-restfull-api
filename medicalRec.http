@@ -17,13 +17,14 @@ Accept: application/json
 POST http://localhost:3000/api/medical-records
 Content-Type: application/json
 Accept: application/json
-Authorization: a339455e-354e-4dc6-8eaf-5cb7e9b69d24
+Authorization: 99d2c813-6a9a-4933-8cb3-ce4d8c8ed75d
 
 {
-    "noRm": "084757 ",
+    "noRm": "0847 ",
     "problem": "Sering BAB",
     "diagnosis": "Gejala diare",
-    "note": "Ini adalah catatan gejala diare"
+    "note": "Ini adalah catatan gejala diare",
+    "patientId": 2
 }
 
 ### Get all Medical Record -----------------
@@ -31,7 +32,7 @@ Authorization: a339455e-354e-4dc6-8eaf-5cb7e9b69d24
 GET http://localhost:3000/api/medical-records
 Content-Type: application/json
 Accept: application/json
-Authorization: c6d6919d-7670-4697-af7d-7b8d37fa9519
+Authorization: 99d2c813-6a9a-4933-8cb3-ce4d8c8ed75d
 
 ### Get detail Medical Record -----------------
 
@@ -70,3 +71,18 @@ DELETE http://localhost:3000/api/users/logout
 Content-Type: application/json
 Accept: application/json
 Authorization: f20e3afb-eadf-4652-bd6e-f4a6b33674ae
+
+
+### Get all print Medical Record -----------------
+
+GET http://localhost:3000/api/print-medical-records
+Content-Type: application/json
+Accept: application/json
+Authorization: d1914d3b-3d1a-4ea2-9d4e-0c1b414b9e20 
+
+### Get detail print Medical Record -----------------
+
+GET http://localhost:3000/api/print-medical-records/1
+Content-Type: application/json
+Accept: application/json
+Authorization: d1914d3b-3d1a-4ea2-9d4e-0c1b414b9e20 

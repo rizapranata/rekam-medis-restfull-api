@@ -71,8 +71,8 @@ const get = async (req, res, next) => {
     } catch (e) {
         res.json({
             error: 1,
-            message: err.message,
-            fields: err.errors,
+            message: e.message,
+            fields: e.errors,
         });
 
         next(e)
@@ -96,11 +96,14 @@ const search = async (req, res, next) => {
             page: req.query.page,
             size: req.query.size
         };
+        console.log("request MR 1:", request);
+
         const result = await medicalRecordService.search(user, request);
         res.status(200).json({
             status: "success",
             message: "get all medical records successful",
-            data: result
+            data: result.data,
+            paging: result.paging,
         })
     } catch (e) {
         next(e)
@@ -126,7 +129,7 @@ const remove = async (req, res, next) => {
             data: `medical record with id ${medicalRecordId} is already deleted!`
         })
     } catch (e) {
-        res.status(500).json({
+        res.json({
             error: 1,
             message: e.message
         })

@@ -6,6 +6,7 @@ import patientController from "../controller/patient-controller.js";
 import polyclinicController from "../controller/polyclinic-controller.js";
 import drugController from "../controller/drug-controller.js";
 import medicalRecordController from "../controller/medicalRecord-controller.js";
+import printMedicalRecordController from "../controller/printMedicalRecord-controller.js";
 
 const userRouter = new express.Router()
 userRouter.use(authMiddleware)
@@ -45,6 +46,11 @@ userRouter.get('/api/medical-records', medicalRecordController.search);
 userRouter.delete('/api/medical-records/:medicalRecordId', medicalRecordController.remove);
 userRouter.put('/api/medical-records/:medicalRecordId', medicalRecordController.update);
 userRouter.get('/api/medical-records/:medicalRecordId', medicalRecordController.get);
+
+//MedicalRecord Print API
+userRouter.get('/api/print-medical-records/:medicalRecordId', printMedicalRecordController.get);
+userRouter.get('/api/print-medical-records', printMedicalRecordController.search);
+userRouter.delete('/api/print-medical-records/:medicalRecordId', printMedicalRecordController.remove);
 
 export {
     userRouter
