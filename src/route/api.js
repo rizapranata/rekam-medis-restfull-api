@@ -12,7 +12,7 @@ const userRouter = new express.Router()
 userRouter.use(authMiddleware)
 
 // User API
-userRouter.get('/api/users/current', userController.get);
+userRouter.get('/api/users/current/:username', userController.get);
 userRouter.patch('/api/users', userController.update);
 userRouter.post('/api/users/logout', userController.logout);
 userRouter.post('/api/users/create', userController.create);
