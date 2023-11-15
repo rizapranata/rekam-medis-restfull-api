@@ -136,12 +136,12 @@ const get = async (username) => {
     return user;
 }
 
-const update = async (request) => {
+const update = async (username, request) => {
     const user = validate(updateUserValidation, request);
 
     const totalUserInDatabase = await prismaClient.user.count({
         where: {
-            username: user.username
+            username: username
         }
     })
 
@@ -167,6 +167,8 @@ const update = async (request) => {
     }
     if (user.status) {
         data.status = user.status
+    }else{
+        data.status = user.status
     }
     if (user.role) {
         data.role = user.role
@@ -177,7 +179,7 @@ const update = async (request) => {
 
     return prismaClient.user.update({
         where: {
-            username: user.username
+            username: username
         },
         data: data,
         select: {

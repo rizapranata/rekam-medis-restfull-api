@@ -92,7 +92,7 @@ const search = async (req, res, next) => {
         const user = req.user;
         const request = {
             name: req.query.name,
-            nik: req.query.nik,
+            noRm: req.query.noRm,
             page: req.query.page,
             size: req.query.size
         };

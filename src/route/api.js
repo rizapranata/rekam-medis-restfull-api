@@ -13,10 +13,10 @@ userRouter.use(authMiddleware)
 
 // User API
 userRouter.get('/api/users/current/:username', userController.get);
-userRouter.patch('/api/users', userController.update);
+userRouter.patch('/api/users/:username', userController.update);
 userRouter.post('/api/users/logout', userController.logout);
 userRouter.post('/api/users/create', userController.create);
-userRouter.delete('/api/users/delete', userController.remove);
+userRouter.delete('/api/users/delete/:username', userController.remove);
 userRouter.get('/api/users', userController.search);
 
 // Patient API

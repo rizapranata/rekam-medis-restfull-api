@@ -1,10 +1,4 @@
 import Joi from "joi";
-import JoiDate from "@joi/date";
-const joiDateUse = Joi.extend(JoiDate);
-
-const drugIdObj = Joi.object({
-    drugSelectedId: Joi.number().integer().min(0).optional(),
-  });
 
 const createMRValidation = Joi.object({
     noRm: Joi.string().max(20).required(),
@@ -26,7 +20,7 @@ const searchMRValidation = Joi.object({
     page: Joi.number().min(1).positive().default(1),
     size: Joi.number().min(1).positive().max(100).default(10),
     name: Joi.string().max(100).optional(),
-    nik: Joi.string().max(30).optional(),
+    noRm: Joi.string().max(30).optional(),
 });
 
 const getMRValidation = Joi.number().positive().required();

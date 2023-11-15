@@ -50,6 +50,10 @@ const update = async (req, res, next) => {
       data: result,
     });
   } catch (e) {
+    res.json({
+      error: 1,
+      message: e.message,
+    });
     next(e);
   }
 };

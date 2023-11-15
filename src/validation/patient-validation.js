@@ -31,7 +31,7 @@ const getPatientValidation = Joi.number().positive().required();
 const searchPatientValidation = Joi.object({
     page: Joi.number().min(1).positive().default(1),
     size: Joi.number().min(1).positive().max(100).default(10),
-    name: Joi.string().optional(),
+    name: Joi.string().max(20).optional(),
     gender: Joi.string().optional(),
     age: Joi.number().positive().optional(),
     noRm: Joi.string().max(30).optional(),

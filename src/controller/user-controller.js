@@ -48,6 +48,10 @@ const login = async (req, res, next) => {
             data: result
         })
     } catch (e) {
+        res.json({
+            error: 1,
+            message: "login failed",
+        })
         next(e)
     }
 }
@@ -76,7 +80,8 @@ const update = async (req, res, next) => {
 
     try {
         const request = req.body;
-        const result = await userService.update(request);
+        const username = req.params.username;
+        const result = await userService.update(username, request);
         res.status(200).json({
             data: result
         })
@@ -106,8 +111,8 @@ const remove = async (req, res, next) => {
     };
 
     try {
-        const user = req.body;
-        await userService.remove(user.username);
+        const user = req.params.username;
+        await userService.remove(user);
         res.status(200).json({
             data: `${username} is already deleted!`
         })
