@@ -119,10 +119,13 @@ const remove = async (req, res, next) => {
         const user = req.params.username;
         await userService.remove(user);
         res.status(200).json({
-            data: `${username} is already deleted!`
+            data: `${user.username} is already deleted!`
         })
-
     } catch (e) {
+        res.json({
+            error: 1,
+            message: `terjadi kesalahan`,
+        })
         next(e)
     }
 }
