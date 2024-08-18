@@ -2,7 +2,7 @@
 
 ## register super user -----------------
 
-POST http://localhost:3000/api/users
+POST http://localhost:3001/api/users
 Content-Type: application/json
 Accept: application/json
 
@@ -18,7 +18,7 @@ Accept: application/json
 
 ### login super user -----------------
 
-POST http://localhost:3000/api/users/login
+POST http://localhost:3001/api/users/login
 Content-Type: application/json
 Accept: application/json
 
@@ -29,12 +29,12 @@ Accept: application/json
 
 ### login admin -----------------
 
-POST http://localhost:3000/api/users/login
+POST http://localhost:3001/api/users/login
 Content-Type: application/json
 Accept: application/json
 
 {
-    "username": "samsul",
+    "username": "agus",
     "password": "rahasia"
 }
 
@@ -52,10 +52,10 @@ Accept: application/json
 
 ### create user -----------------
 
-POST http://localhost:3000/api/users/create
+POST http://localhost:3001/api/users/create
 Content-Type: application/json
 Accept: application/json
-Authorization: aaf987cd-d201-4771-b541-689bd82aabd2
+Authorization: 3a602303-333a-477e-aa49-e158c38c9060
 
 {
     "username": "agus",
@@ -63,18 +63,16 @@ Authorization: aaf987cd-d201-4771-b541-689bd82aabd2
     "name": "Agus Salim",
     "email": "agus@gmail.com",
     "phone": "085767889990",
-    "specialist": "-",
-    "poliName": "-",
     "status": true,
     "role": "admin"
 }
 
 ### Get current user -----------------
 
-GET http://localhost:3000/api/users/current
+GET http://localhost:3001/api/users/current
 Content-Type: application/json
 Accept: application/json
-Authorization: 8bbf2641-c5a3-4f3d-a737-aa661430a671
+Authorization: 9f3b35a1-3aeb-4160-a867-78bb573360b4
 
 ### Patch user -----------------
 
@@ -97,25 +95,25 @@ Authorization: d829a0a3-037e-41fb-b330-43d0e3fbcfa6
 
 ### delete user ---------------
 
-DELETE http://localhost:3000/api/users/delete
+DELETE http://localhost:3001/api/users/delete/karina
 Content-Type: application/json
 Accept: application/json
-Authorization: b0ba2620-a439-45f3-87e3-816a40b4566d
+Authorization: 296e3161-faea-4ca7-9ce3-04cb48ec06d4
 
-{
-    "username": "kuncuy"
-}
+# {
+#     "username": "karina"
+# }
 
 ### get all user ---------------
 
-GET http://localhost:3000/api/users
+GET http://localhost:3001/api/users
 Content-Type: application/json
 Accept: application/json
-Authorization: aaf987cd-d201-4771-b541-689bd82aabd2
+Authorization: 783e20bd-1c30-4d7e-8fbf-2aa6dba321c2
 
 ### logout -----------------
 
-DELETE http://localhost:3000/api/users/logout
+DELETE http://localhost:3001/api/users/logout
 Content-Type: application/json
 Accept: application/json
-Authorization: ad0a5e1c-5ae2-4b43-ad08-751fb50d0b62
+Authorization: 9f3b35a1-3aeb-4160-a867-78bb573360b4

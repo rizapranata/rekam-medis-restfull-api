@@ -27,8 +27,6 @@ const register = async (request) => {
             name: true,
             email: true,
             phone: true,
-            specialist: true,
-            poliName: true,
             status: true,
             role: true
         }
@@ -57,8 +55,6 @@ const create = async (request) => {
             name: true,
             email: true,
             phone: true,
-            specialist: true,
-            poliName: true,
             status: true,
             role: true
         }
@@ -103,8 +99,6 @@ const login = async (request) => {
             phone: true,
             role: true,
             status: true,
-            specialist: true,
-            poliName: true,
             password: true
         }
     })
@@ -122,8 +116,6 @@ const get = async (username) => {
             name: true,
             email: true,
             phone: true,
-            specialist: true,
-            poliName: true,
             status: true,
             role: true
         }
@@ -159,12 +151,6 @@ const update = async (username, request) => {
     if (user.phone) {
         data.phone = user.phone
     }
-    if (user.specialist) {
-        data.specialist = user.specialist
-    }
-    if (user.poliName) {
-        data.poliName = user.poliName
-    }
     if (user.status) {
         data.status = user.status
     }else{
@@ -187,8 +173,6 @@ const update = async (username, request) => {
             name: true,
             email: true,
             phone: true,
-            specialist: true,
-            poliName: true,
             status: true,
             role: true
         }

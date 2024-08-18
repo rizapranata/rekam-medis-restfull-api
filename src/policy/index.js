@@ -27,6 +27,26 @@ const policies = {
         can("update", "MedicalRecord", {user_id: user.username});
         can("read", "MedicalRecord", {user_id: user.username});
         can("view", "MedicalRecord");
+        can("create", "Progress", {user_id: user.username});
+        can("read", "Progress", {user_id: user.username});
+        can("update", "Progress", {user_id: user.username});
+        can("read", "Progress", {user_id: user.username});
+        can("view", "Progress");
+        can("create", "Image", {user_id: user.username});
+        can("read", "Image", {user_id: user.username});
+        can("update", "Image", {user_id: user.username});
+        can("read", "Image", {user_id: user.username});
+        can("view", "Image");
+        can("read", "User", {user_id: user.username});
+        can("view", "User");
+        can("create", "Project", {user_id: user.username});
+        can("read", "Project", {user_id: user.username});
+        can("update", "Project", {user_id: user.username});
+        can("read", "Project", {user_id: user.username});
+        can("delete", "Project", {user_id: user.username});
+        can("view", "Project");
+        can("read", "User", {user_id: user.username});
+        can("view", "User");
     },
 
     doctor(user, {can}) {
@@ -40,6 +60,13 @@ const policies = {
         can("update", "Patient", {user_id: user.username});
         can("view", "Polyclinic");
         can("view", "Patient");
+    },
+
+    client(user, {can}) {
+        can("view", "Progress");
+        can("read", "Progress", {user_id: user.username});
+        can("view", "Project");
+        can("read", "Project", {user_id: user.username});
     },
 
     superAdmin(user, {can}) {

@@ -7,6 +7,10 @@ import polyclinicController from "../controller/polyclinic-controller.js";
 import drugController from "../controller/drug-controller.js";
 import medicalRecordController from "../controller/medicalRecord-controller.js";
 import printMedicalRecordController from "../controller/printMedicalRecord-controller.js";
+import progressController from "../controller/progress-controller.js";
+import projectController from "../controller/project-controller.js";
+import multer from "multer";
+import os from "os";
 
 const userRouter = new express.Router()
 userRouter.use(authMiddleware)
@@ -51,6 +55,16 @@ userRouter.get('/api/medical-records/:medicalRecordId', medicalRecordController.
 userRouter.get('/api/print-medical-records/:medicalRecordId', printMedicalRecordController.get);
 userRouter.get('/api/print-medical-records', printMedicalRecordController.search);
 userRouter.delete('/api/print-medical-records/:medicalRecordId', printMedicalRecordController.remove);
+
+// Progress API
+userRouter.post('/api/progress', multer({ dest: os.tmpdir() }).array('images', 12), progressController.create);
+
+// Project API
+userRouter.get('/api/projects', projectController.search);
+userRouter.post('/api/project', projectController.create);
+userRouter.get('/api/project/:projectId', projectController.get);
+userRouter.put('/api/project/:projectId', projectController.update);
+userRouter.delete('/api/project/:projectId', projectController.remove);
 
 export {
     userRouter
